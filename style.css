@@ -7,7 +7,15 @@ html {
   box-sizing: inherit;
 }
 
-/* LINKS */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.navbar {
+  border-bottom: 3px solid #222222;
+  /* margin-top: 0.5rem; */
+}
+
 a {
   text-decoration: none;
 }
@@ -23,8 +31,28 @@ a {
 
 /* Set gray background color and 100% height */
 .sidenav {
-  padding-top: 20px;
+  /* padding-top: 20px; */
+  /* background-color: #f1f1f1; */
+  min-height: 69.8125rem;
+  /* height: 100%; */
+  /* border-radius: 2rem; */
+}
+
+.card {
   background-color: #f1f1f1;
-  height: 100%;
-  border-radius: 2rem;
+}
+
+.container-for-buttons {
+  outline: 3px solid #222222;
+  /* position: absolute; */
+  width: 377px;
+  height: 894px;
+  left: 80px;
+  top: 277px;
+  list-style-type: none;
+}
+/* THIS IS THE TOP MARGIN CLASS, MAYBE NOT GREAT PRACTICE */
+.mt-5,
+.custom-increase {
+  margin-top: calc(35px + 30px);
 }
