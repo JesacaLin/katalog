@@ -1,0 +1,30 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* LINKS */
+a {
+  text-decoration: none;
+}
+
+.button {
+  border: 0;
+  background: transparent;
+}
+
+.actions-icon-bootstrap {
+  cursor: pointer;
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+  border-radius: 2rem;
+}
