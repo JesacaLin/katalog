@@ -9,7 +9,7 @@ html {
 
 body {
   font-family: "Inter", sans-serif;
-  margin: 0 3rem;
+  /* margin: 0 3rem; */
 }
 
 .navbar {
@@ -39,8 +39,10 @@ a {
   /* border-radius: 2rem; */
 }
 
-.card {
+.cards {
   background-color: #f1f1f1;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
 }
 
 .container-for-buttons {
@@ -53,7 +55,7 @@ a {
   list-style-type: none;
 }
 /* THIS IS THE TOP MARGIN CLASS, MAYBE NOT GREAT PRACTICE */
-.mt-5,
+/* .mt-5,
 .custom-increase {
   margin-top: calc(35px + 30px);
-}
+} */
