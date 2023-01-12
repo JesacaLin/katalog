@@ -1,17 +1,12 @@
 html {
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
+  height: 100%;
 }
 *,
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-/* IDS */
-#search {
-  border: none;
-  stroke: none;
 }
 
 /* GROUP STYLES */
@@ -58,11 +53,6 @@ a {
   cursor: pointer;
 }
 
-/* Set gray background color and 100% height */
-.sidenav {
-  min-height: 69.8125rem;
-}
-
 .cards {
   background-color: #f1f1f1;
   padding: 2.5rem;
@@ -72,7 +62,7 @@ a {
 
 .container-for-buttons {
   outline: 2px solid #222222;
-  min-height: 600px;
+  /* min-height: 800px; */
   list-style-type: none;
   padding: 2.5rem;
 }
@@ -84,6 +74,11 @@ a {
 }
 
 /* RIGHT SIDE */
+#search {
+  border: none;
+  stroke: none;
+}
+
 .table {
   background-color: #f1f1f1;
   text-align: left;
