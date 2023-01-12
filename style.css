@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 *,
 *:before,
@@ -14,11 +15,22 @@ html {
 }
 
 /* GROUP STYLES */
+
+/* BORDER RADIUS */
 .cards,
 .container-for-buttons,
 .sidenav,
-.form-control {
-  border-radius: 1.5rem;
+.form-control,
+.table,
+#states {
+  border-radius: 15px;
+}
+
+/* FONT WEIGHT */
+.name,
+.location,
+.logoName {
+  font-weight: 700;
 }
 
 body {
@@ -38,6 +50,10 @@ a {
   background: transparent;
 }
 
+.btn {
+  outline: none;
+}
+
 .actions-icon-bootstrap {
   cursor: pointer;
 }
@@ -52,14 +68,23 @@ a {
   padding: 2.5rem;
 }
 
+/* LEFT SIDE BAR */
+
 .container-for-buttons {
-  outline: 3px solid #222222;
-  width: 377px;
-  height: 894px;
-  left: 80px;
-  top: 277px;
+  outline: 2px solid #222222;
+  min-height: 600px;
   list-style-type: none;
+  padding: 2.5rem;
 }
-.btn {
-  outline: none;
+
+#states {
+  background-color: #f1f1f1;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+/* RIGHT SIDE */
+.table {
+  background-color: #f1f1f1;
+  text-align: left;
 }

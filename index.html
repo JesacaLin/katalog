@@ -21,10 +21,9 @@
   </head>
   <body>
     <!-- CONTAINER FOR NAV -->
-
     <nav class="navbar navbar-expand justify-content-between w-100">
       <div class="container-fluid">
-        <h2>Katalog</h2>
+        <h2 class="logoName ps-4">KATALOG</h2>
         <div class="d-flex flex-row">
           <button class="button d-flex align-items-center">
             <img
@@ -34,14 +33,12 @@
               alt="add"
               id="login"
             />
-            <span class="fs-5">LOGIN</span>
-            <!-- <span class="fs-5 m-2">|</span> -->
+            <span class="fs-6">LOGIN</span>
           </button>
           <button class="button d-flex align-items-center">
             <span class="fs-5">|</span>
-            <!-- <span class="fs-5 m-2">|</span> -->
           </button>
-          <!-- <span class="fs-5 mx-2">|</span> -->
+
           <button class="button d-flex align-items-center">
             <img
               src="./assets/add-light.svg"
@@ -50,7 +47,7 @@
               alt="add"
               id="sighUP"
             />
-            <span class="fs-5">SIGN UP</span>
+            <span class="fs-6">SIGN UP</span>
           </button>
           <button class="button d-flex align-items-center m-2">
             <img
@@ -61,12 +58,10 @@
               id="toggle"
             />
           </button>
-          <!-- <input type="checkbox" class="toggle" id="toggle" />
-          <span class="slider"></span> -->
           <a
             href="https://github.com/JesacaLin/to-do-list-project"
             target="_blank"
-            class="text-reset text-decoration-none d-flex align-items-center"
+            class="text-reset text-decoration-none d-flex align-items-center pe-4"
           >
             <img
               src="https://raw.githubusercontent.com/JesacaLin/dev-kitty/9b9c8e0d370ed7f93549104a1d86771704043b87/public/img/Github.svg"
@@ -81,13 +76,16 @@
     <!------------- MAIN BODY CONTAINER? --------->
     <div class="container-fluid px-4 text-center">
       <div class="row mt-5">
+        <!--  -->
+        <!--  -->
         <!-- LEFT SIDE BAR -->
-        <div class="col-lg-3 sidenav mt-5">
-          <!-- I need an inner div to contain the location buttons -->
+        <div class="col-lg-3 sidenav mt-5 ps-4">
+          <!-- LIST OF STATES -->
           <ul class="container-for-buttons mt-5">
+            <h6 class="location">UNITED STATES</h6>
             <li>
-              <button class="button">
-                <span class="fs-5">state</span>
+              <button class="button mt-4" id="states">
+                <span class="fs-6 font-weight-semi-bold">New York</span>
               </button>
             </li>
           </ul>
@@ -108,9 +106,9 @@
                   alt="add"
                   id="login"
                 />
-                <span class="fs-5 m-2">ADD CONTRIBUTOR</span>
+                <span class="fs-6 m-2">ADD CONTRIBUTOR</span>
               </button>
-              <form class="d-flex" role="search">
+              <form class="d-flex pe-4" role="search">
                 <input
                   class="form-control"
                   type="search"
@@ -130,33 +128,97 @@
             </div>
           </div>
           <!-- EACH FULL CARD HERE -->
-          <div class="cardContainer text-left mt-5 pt-5">
-            <div class="cards">
-              <div class="cardTop d-flex">
-                <div class="topRowLeft d-flex col-6">
+          <div class="cardContainer mt-5 pt-5 pe-4">
+            <table class="table table-borderless table-responsive-xxl">
+              <tbody>
+                <tr class="cardTop">
+                  <th scope="row" class="tableName pt-4 ps-4">
+                    <h5 class="name">JESACA LIN</h5>
+                  </th>
+                  <td class="pt-4">Category</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td class="pt-4">Country</td>
+                  <td class="pt-4">State</td>
+                  <td class="pt-4">city</td>
+                </tr>
+                <tr>
+                  <td class="pb-4 ps-4">917-279-0866</td>
+                  <td>Email</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>Portfolio</td>
+                  <td>Past Work</td>
+                  <td>up</td>
+                  <td>down</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- <div class="cardContainer text-left mt-5 pt-5">
+            <table
+              class="table table-borderless align-top table-responsive-xxl"
+            >
+              <tbody>
+                <tr class="cardTop d-flex mt-3">
+                  <td class="topRowLeft d-flex col-6">
+                    <h4 class="px-4">Jesaca Lin</h4>
+                  </td>
+                  <td class="topRowRight d-flex col-6">
+                    <span class="px-4">State</span>
+                    <span class="px-4">City</span>
+                  </td>
+                </tr>
+                <tr class="cardBottom d-flex mt-1">
+                  <td class="bottomRowLeft d-flex col-6">
+                    <span class="px-4">917-279-0866</span>
+                    <span class="px-4">JesacaLin@gmail.com</span>
+                  </td>
+                  <td class="bottomRowRight d-flex col-6 mb-3">
+                    <span class="px-4">Portfolio</span>
+                    <span class="px-4">Past Work</span>
+                    <span class="px-4">up</span>
+                    <span class="px-4">down</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+
+          <!-- <div class="cardContainer text-left mt-5 pt-5"> -->
+          <!-- <div class="cards"> -->
+          <!-- <div class="cardTop d-flex"> -->
+          <!-- <div class="topRowLeft d-flex col-6">
                   <h4 class="px-4">Jesaca Lin</h4>
-                </div>
-                <!-- To prevent repetitive code, i can do a css property for px-4 -->
-                <div class="topRowRight d-flex col-6">
+                </div> -->
+          <!-- To prevent repetitive code, i can do a css property for px-4 -->
+          <!-- <div class="topRowRight d-flex col-6">
                   <span class="px-4">Photo</span>
                   <span class="px-4">State</span>
                   <span class="px-4">City</span>
-                </div>
-              </div>
-              <div class="cardBottom d-flex mt-1">
-                <div class="bottomRowLeft d-flex col-6">
+                </div> -->
+          <!-- </div> -->
+          <!-- <div class="cardBottom d-flex mt-1"> -->
+          <!-- <div class="bottomRowLeft d-flex col-6">
                   <span class="px-4">917-279-0866</span>
                   <span class="px-4">JesacaLin@gmail.com</span>
-                </div>
-                <div class="bottomRowRight d-flex col-6">
+                </div> -->
+          <!-- <div class="bottomRowRight d-flex col-6">
                   <span class="px-4">Portfolio</span>
                   <span class="px-4">Past Work</span>
                   <span class="px-4">up</span>
                   <span class="px-4">down</span>
-                </div>
-              </div>
-            </div>
-          </div>
+                </div> -->
+          <!-- </div> -->
+          <!-- </div> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>
