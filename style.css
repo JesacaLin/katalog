@@ -7,14 +7,26 @@ html {
   box-sizing: inherit;
 }
 
+/* IDS */
+#search {
+  border: none;
+  stroke: none;
+}
+
+/* GROUP STYLES */
+.cards,
+.container-for-buttons,
+.sidenav,
+.form-control {
+  border-radius: 1.5rem;
+}
+
 body {
   font-family: "Inter", sans-serif;
-  /* margin: 0 3rem; */
 }
 
 .navbar {
   border-bottom: 3px solid #222222;
-  /* margin-top: 0.5rem; */
 }
 
 a {
@@ -32,30 +44,22 @@ a {
 
 /* Set gray background color and 100% height */
 .sidenav {
-  /* padding-top: 20px; */
-  /* background-color: #f1f1f1; */
   min-height: 69.8125rem;
-  /* height: 100%; */
-  /* border-radius: 2rem; */
 }
 
 .cards {
   background-color: #f1f1f1;
   padding: 2.5rem;
-  border-radius: 1.5rem;
 }
 
 .container-for-buttons {
   outline: 3px solid #222222;
-  /* position: absolute; */
   width: 377px;
   height: 894px;
   left: 80px;
   top: 277px;
   list-style-type: none;
 }
-/* THIS IS THE TOP MARGIN CLASS, MAYBE NOT GREAT PRACTICE */
-/* .mt-5,
-.custom-increase {
-  margin-top: calc(35px + 30px);
-} */
+.btn {
+  outline: none;
+}
