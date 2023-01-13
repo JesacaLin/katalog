@@ -90,9 +90,9 @@
                 <span class="fs-6 m-2">ADD CONTRIBUTOR</span>
               </button>
               <!-- POP UP TO ADD A CONTRIBUTOR -->
-              <form>
+              <form class="contributor-form">
                 <!-- name -->
-                <input type="text" placeholder="Name" />
+                <label>Name: <input type="text" id="name" name="name" /></label>
                 <!-- category -->
                 <select>
                   <option value="">Choose Category</option>
@@ -105,7 +105,7 @@
                   <option value="other">Other</option>
                 </select>
                 <!-- country -->
-                <input type="text" placeholder="Country" />
+                <!-- <input type="text" placeholder="Country" /> -->
                 <!-- state -->
                 <input type="text" placeholder="State" />
                 <!-- city -->
@@ -123,13 +123,6 @@
                   required
                 />
                 <!-- Past work -->
-                <input
-                  type="url"
-                  name="link"
-                  placeholder="Past Work Link"
-                  pattern="https?://.+"
-                  required
-                />
                 <button type="submit">Submit</button>
               </form>
               <form class="d-flex pe-4" role="search">
@@ -166,7 +159,7 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td class="pt-4">Country</td>
+                  <!-- <td class="pt-4">Country</td> -->
                   <td class="pt-4">State</td>
                   <td class="pt-4">city</td>
                 </tr>
@@ -179,7 +172,6 @@
                   <td></td>
                   <td></td>
                   <td>Portfolio</td>
-                  <td>Past Work</td>
                   <td>up</td>
                   <td>down</td>
                 </tr>
@@ -252,5 +244,6 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
+    <script src="./script.js"></script>
   </body>
 </html>

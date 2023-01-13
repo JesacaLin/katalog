@@ -10,8 +10,6 @@ html {
 }
 
 /* GROUP STYLES */
-
-/* BORDER RADIUS */
 .cards,
 .container-for-buttons,
 .sidenav,
@@ -31,10 +29,15 @@ html {
 
 body {
   font-family: "Inter", sans-serif;
+  background-image: url(./assets/bg-plant-1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .navbar {
   border-bottom: 3px solid #222222;
+  position: sticky;
+  background-color: #f1f1f1;
 }
 
 a {
@@ -74,6 +77,11 @@ a {
   width: 100%;
   font-weight: 500;
 }
+
+/* CONTRIBUTOR - ADD - SEARCH */
+/* .hidden {
+  display: none !important;
+} */
 
 /* RIGHT SIDE */
 #search {
