@@ -18,13 +18,14 @@ html {
 .form-control,
 .table,
 #states {
-  border-radius: 15px;
+  border-radius: 25px;
 }
 
 /* FONT WEIGHT */
 .name,
 .location,
-.logoName {
+.logoName,
+.fs-5 {
   font-weight: 700;
 }
 
@@ -71,6 +72,7 @@ a {
   background-color: #f1f1f1;
   padding: 0.5rem;
   width: 100%;
+  font-weight: 500;
 }
 
 /* RIGHT SIDE */

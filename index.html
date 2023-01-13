@@ -25,30 +25,13 @@
       <div class="container-fluid">
         <h2 class="logoName ps-4">KATALOG</h2>
         <div class="d-flex flex-row">
+          <button class="button d-flex align-items-center fs-6">LOGIN</button>
           <button class="button d-flex align-items-center">
-            <img
-              src="./assets/add-light.svg"
-              class="add me-3"
-              height="20"
-              alt="add"
-              id="login"
-            />
-            <span class="fs-6">LOGIN</span>
-          </button>
-          <button class="button d-flex align-items-center">
-            <span class="fs-5">|</span>
+            |
+            <!-- <span class="fs-5">|</span> -->
           </button>
 
-          <button class="button d-flex align-items-center">
-            <img
-              src="./assets/add-light.svg"
-              class="add me-3"
-              height="20"
-              alt="add"
-              id="sighUP"
-            />
-            <span class="fs-6">SIGN UP</span>
-          </button>
+          <button class="button d-flex align-items-center fs-6">SIGN UP</button>
           <button class="button d-flex align-items-center m-2">
             <img
               src="./assets/toggle.svg"
@@ -84,9 +67,7 @@
           <ul class="container-for-buttons mt-5">
             <h6 class="location">UNITED STATES</h6>
             <li>
-              <button class="button mt-4" id="states">
-                <span class="fs-6 font-weight-semi-bold">New York</span>
-              </button>
+              <button class="button mt-4" id="states">New York</button>
             </li>
           </ul>
         </div>
@@ -108,6 +89,49 @@
                 />
                 <span class="fs-6 m-2">ADD CONTRIBUTOR</span>
               </button>
+              <!-- POP UP TO ADD A CONTRIBUTOR -->
+              <form>
+                <!-- name -->
+                <input type="text" placeholder="Name" />
+                <!-- category -->
+                <select>
+                  <option value="">Choose Category</option>
+                  <option value="photo">Photo</option>
+                  <option value="video">Video</option>
+                  <option value="stylist">Stylist</option>
+                  <option value="makeup">Makeup</option>
+                  <option value="hair">Hair Stylist</option>
+                  <option value="assistant">Assistant</option>
+                  <option value="other">Other</option>
+                </select>
+                <!-- country -->
+                <input type="text" placeholder="Country" />
+                <!-- state -->
+                <input type="text" placeholder="State" />
+                <!-- city -->
+                <input type="text" placeholder="City" />
+                <!-- phone -->
+                <input type="tel" placeholder="###-###-####" />
+                <!-- email -->
+                <input type="email" placeholder="Email" />
+                <!-- Portfolio -->
+                <input
+                  type="url"
+                  name="link"
+                  placeholder="Portfolio link"
+                  pattern="https?://.+"
+                  required
+                />
+                <!-- Past work -->
+                <input
+                  type="url"
+                  name="link"
+                  placeholder="Past Work Link"
+                  pattern="https?://.+"
+                  required
+                />
+                <button type="submit">Submit</button>
+              </form>
               <form class="d-flex pe-4" role="search">
                 <input
                   class="form-control"
