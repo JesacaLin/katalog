@@ -14,7 +14,6 @@ html {
 .cards,
 .container-for-buttons,
 .sidenav,
-.form-control,
 .table,
 #states {
   border-radius: 25px;
@@ -24,21 +23,22 @@ html {
 .name,
 .location,
 .logoName,
-.fs-5 {
+.fs-5,
+#modal-title {
   font-weight: 700;
 }
 
 body {
   font-family: "Inter", sans-serif;
-  background-image: url(./assets/bg-pattern-2.png);
+  background-image: url(./assets/bg-plant-1.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .navbar {
-  border-bottom: 3px solid #222222;
+  border-bottom: 2px solid #222222;
   position: sticky;
-  /* background-color: #f1f1f1; */
+  background-color: #f1f1f1;
   /* background-color: white; */
 }
 
@@ -95,10 +95,15 @@ input::placeholder {
 .modal-body {
   border-color: transparent;
 }
-.form-label {
-  text-align: left;
+.form-control,
+.input-group-text,
+.form-select {
+  border-radius: 10px;
 }
 
+/* .form-select {
+  max-width: 40%;
+} */
 /* #modal-title {
   text-align: right;
 } */
