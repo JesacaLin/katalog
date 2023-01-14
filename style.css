@@ -13,6 +13,7 @@ html {
 /* GROUP STYLES */
 .cards,
 .container-for-buttons,
+.cardContainer,
 .sidenav,
 .table,
 #states {
@@ -30,15 +31,17 @@ html {
 
 body {
   font-family: "Inter", sans-serif;
-  background-image: url(./assets/bg-plant-1.png);
-  background-repeat: no-repeat;
+  background-image: url(./assets/bg-pattern-2.png);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 .navbar {
   border-bottom: 2px solid #222222;
   position: sticky;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   /* background-color: white; */
 }
 
@@ -68,7 +71,7 @@ a {
 
 .container-for-buttons {
   outline: 2px solid #222222;
-  /* min-height: 800px; */
+  min-height: 600px;
   list-style-type: none;
   padding: 2.5rem;
 }
@@ -97,7 +100,8 @@ input::placeholder {
 }
 .form-control,
 .input-group-text,
-.form-select {
+.form-select,
+.btn-outline-dark {
   border-radius: 10px;
 }
 
@@ -113,7 +117,19 @@ input::placeholder {
 } */
 
 /* RIGHT SIDE */
-#search {
+
+.cardContainer {
+  outline: 2px solid #222222;
+  min-height: 500px;
+
+  padding: 2.5rem;
+}
+
+/* #searchBar {
+  max-width: 400px;
+} */
+
+#searchIcon {
   border: none;
   stroke: none;
 }
@@ -121,4 +137,12 @@ input::placeholder {
 .table {
   background-color: #f1f1f1;
   text-align: left;
+}
+
+.voteButton {
+  max-width: 100%;
+  width: 80px;
+  background-color: white;
+  border-radius: 25px;
+  font-weight: 600;
 }

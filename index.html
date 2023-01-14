@@ -88,24 +88,24 @@
                 data-bs-toggle="modal"
                 data-bs-target="#reg-modal"
               >
-                <span class="add" id="login">
-                  <i class="bi bi-plus-circle-fill"></i>
-                </span>
-                <!-- <img
+                <img
                   src="./assets/add-dark.svg"
-                  class="add d-inline-block align-text-top"
-                  height="20"
+                  class="add d-inline-block align-items-center"
+                  height="25"
                   alt="add"
                   id="add"
-                /> -->
-                <span class="fs-6 m-2">ADD A CONTRIBUTOR</span>
+                />
+                <span class="align-items-center fs-6 m-2"
+                  >ADD A CONTRIBUTOR</span
+                >
               </button>
               <form class="d-flex pe-4" role="search">
                 <input
                   class="form-control"
                   type="search"
-                  placeholder="Search by name, location or talent type"
+                  placeholder="Search..."
                   aria-label="Search"
+                  id="searchBar"
                 />
                 <button class="btn btn-no-outline" type="submit">
                   <img
@@ -113,7 +113,7 @@
                     class="d-inline-block align-text-top"
                     height="25"
                     alt="search"
-                    id="search"
+                    id="searchIcon"
                   />
                 </button>
               </form>
@@ -175,8 +175,10 @@
                               </div>
                               <!-- name -->
                               <div class="row justify-content-center my-5">
-                                <div class="col-lg-6">
-                                  <label for="name" class="form-label"
+                                <div class="col-lg-4">
+                                  <label
+                                    for="name"
+                                    class="form-label float-left"
                                     >Name</label
                                   >
                                   <div class="mb-4 input-group">
@@ -191,7 +193,7 @@
                                     />
                                   </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                   <!-- email -->
                                   <label for="email" class="form-label"
                                     >Email</label
@@ -208,9 +210,7 @@
                                     />
                                   </div>
                                 </div>
-                              </div>
-                              <div class="row justify-content-center my-5">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                   <!-- phone -->
                                   <label for="phone" class="form-label"
                                     >Phone Number</label
@@ -227,11 +227,32 @@
                                     />
                                   </div>
                                 </div>
+                              </div>
+                              <div class="row justify-content-center my-5">
+                                <div class="col-lg-6">
+                                  <!-- phone -->
+                                  <label for="portfolio" class="form-label"
+                                    >Portfolio</label
+                                  >
+                                  <div class="mb-4 input-group">
+                                    <span class="input-group-text">
+                                      <i class="bi bi-star-fill"></i>
+                                    </span>
+                                    <input
+                                      type="url"
+                                      class="form-control"
+                                      id="portfolio"
+                                      placeholder="http://"
+                                      pattern="https?://.+"
+                                      required
+                                    />
+                                  </div>
+                                </div>
 
                                 <div class="col-lg-6">
                                   <!-- portfolio -->
-                                  <label for="portfolio" class="form-label"
-                                    >Portfolio</label
+                                  <label for="relevant-work" class="form-label"
+                                    >Relevant Work</label
                                   >
                                   <div class="mb-4 input-group">
                                     <span class="input-group-text">
@@ -240,7 +261,7 @@
                                     <input
                                       type="url"
                                       class="form-control"
-                                      id="portfolio"
+                                      id="relevant-work"
                                       placeholder="http://"
                                       pattern="https?://.+"
                                       required
@@ -287,7 +308,7 @@
                                     <label for="city" class="form-label"
                                       >City</label
                                     >
-                                    <div class="mb-4 input-group">
+                                    <div class="input-group">
                                       <span class="input-group-text">
                                         <i class="bi bi-geo-alt-fill"></i>
                                       </span>
@@ -307,19 +328,25 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn-no-outline">
+                      <button
+                        type="button"
+                        class="btn modalBTN btn-outline-dark"
+                      >
                         Cancel
                       </button>
-                      <button type="submit" class="btn-no-outline">Add</button>
+                      <button
+                        type="submit"
+                        class="btn modalBTN btn-outline-dark ms-3"
+                      >
+                        Add
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <!-- LOOK **********CONTACT FORMS************ -->
             </div>
           </div>
-          <!-- EACH FULL CARD HERE -->
+          <!--LOOK -----------EACH FULL CARD HERE -------->
           <div class="cardContainer mt-5 pt-5 pe-4">
             <table class="table table-borderless table-responsive-xxl">
               <tbody>
@@ -327,28 +354,31 @@
                   <th scope="row" class="tableName pt-4 ps-4">
                     <h5 class="name">JESACA LIN</h5>
                   </th>
-                  <td class="pt-4">Category</td>
+                  <td class="pt-4">Photographer</td>
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <!-- <td class="pt-4">Country</td> -->
-                  <td class="pt-4">State</td>
-                  <td class="pt-4">city</td>
+
+                  <td class="pt-4">United States</td>
+                  <td class="pt-4">California</td>
+                  <td class="pt-4">Austin</td>
                 </tr>
                 <tr>
-                  <td class="pb-4 ps-4">917-279-0866</td>
-                  <td>Email</td>
+                  <td class="pb-4 ps-4 pt-3">917-279-0866</td>
+                  <td class="pt-3">Email</td>
+
                   <td></td>
                   <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Portfolio</td>
-                  <td>up</td>
-                  <td>down</td>
+                  <td class="pt-3"><a href="/">Portfolio</a></td>
+                  <td class="pt-3"><a href="/">Relevant Work</a></td>
+                  <td class="">
+                    <button class="btn voteButton" id="voteUp">👍 8</button>
+                  </td>
+                  <td class="">
+                    <button class="btn voteButton" id="voteDown">
+                      <span class="">👎 2</span>
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
