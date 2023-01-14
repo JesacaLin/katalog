@@ -2,6 +2,7 @@ html {
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
   height: 100%;
+  color: #222222;
 }
 *,
 *:before,
@@ -29,7 +30,7 @@ html {
 
 body {
   font-family: "Inter", sans-serif;
-  background-image: url(./assets/bg-plant-1.png);
+  background-image: url(./assets/bg-pattern-2.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -37,7 +38,8 @@ body {
 .navbar {
   border-bottom: 3px solid #222222;
   position: sticky;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
+  /* background-color: white; */
 }
 
 a {
@@ -79,6 +81,15 @@ a {
 }
 
 /* CONTRIBUTOR - ADD - SEARCH */
+label {
+  font-weight: 500;
+}
+
+input::placeholder {
+  font-weight: 300;
+  font-size: 1rem;
+}
+
 /* .hidden {
   display: none !important;
 } */
