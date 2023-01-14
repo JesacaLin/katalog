@@ -95,6 +95,9 @@ input::placeholder {
 .modal-body {
   border-color: transparent;
 }
+.form-label {
+  text-align: left;
+}
 
 /* #modal-title {
   text-align: right;
