@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
@@ -25,7 +30,10 @@ html {
 .location,
 .logoName,
 .fs-5,
-#modal-title {
+.add-contributor,
+#modal-title,
+#login,
+#sign-up {
   font-weight: 700;
 }
 
@@ -45,8 +53,10 @@ body {
   /* background-color: white; */
 }
 
+/* How to indicate something is a link? */
 a {
   text-decoration: none;
+  color: #222222;
 }
 
 .button {
@@ -105,29 +115,13 @@ input::placeholder {
   border-radius: 10px;
 }
 
-/* .form-select {
-  max-width: 40%;
-} */
-/* #modal-title {
-  text-align: right;
-} */
-
-/* .hidden {
-  display: none !important;
-} */
-
 /* RIGHT SIDE */
 
 .cardContainer {
   outline: 2px solid #222222;
-  min-height: 500px;
-
+  min-height: 510px;
   padding: 2.5rem;
 }
-
-/* #searchBar {
-  max-width: 400px;
-} */
 
 #searchIcon {
   border: none;
