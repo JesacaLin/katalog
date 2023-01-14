@@ -80,7 +80,7 @@ a {
   font-weight: 500;
 }
 
-/* CONTRIBUTOR - ADD - SEARCH */
+/* CONTRIBUTOR - MODAL - SEARCH */
 label {
   font-weight: 500;
 }
@@ -89,6 +89,16 @@ input::placeholder {
   font-weight: 300;
   font-size: 1rem;
 }
+
+.modal-header,
+.modal-footer,
+.modal-body {
+  border-color: transparent;
+}
+
+/* #modal-title {
+  text-align: right;
+} */
 
 /* .hidden {
   display: none !important;
