@@ -2,9 +2,6 @@
 ##### Katalog is a full-stack talent directory app.
 It offers an intuitive way for creative teams to find and organize top talent with its unique upvoting and downvoting system and location-based searching. Built with user experience in mind, Katalog eliminates the need for cluttered excel sheets and simplifies the process of sharing information, improving efficiency and potential.
 
-React | JavaScript | HTML 5 | CSS 3 | Bootstrap 5 | Supabase | Figmatalent directory app. 
-It offers an intuitive way for creative teams to find and organize top talent with its unique upvoting and downvoting system and location-based searching. Built with user experience in mind, Katalog eliminates the need for cluttered excel sheets and simplifies the process of sharing information, improving efficiency and potential. 
-
 <div align="left">  
   
 ##### React | JavaScript | HTML 5 | CSS 3 | Bootstrap 5 | Supabase | Figma 
