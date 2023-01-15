@@ -9,30 +9,30 @@ modalButton.addEventListener("click", function () {
 });
 */
 
-const initialPerson = [
-  {
-    category: "Photographer",
-    name: "Emmy Park",
-    email: "Emmy@emmypark.com",
-    phone: "111-222-3333",
-    portfolio: "http://www.google.com",
-    relevantWork: "http://www.google.com",
-    country: "United States",
-    state: "New York",
-    city: "New York",
-  },
-  {
-    category: "Video",
-    name: "Person Two",
-    email: "Person@emmypark.com",
-    phone: "111-444-3333",
-    portfolio: "http://www.google.com",
-    relevantWork: "http://www.google.com",
-    country: "England",
-    state: "",
-    city: "London",
-  },
-];
+// const initialPerson = [
+//   {
+//     category: "Photographer",
+//     name: "Emmy Park",
+//     email: "Emmy@emmypark.com",
+//     phone: "111-222-3333",
+//     portfolio: "http://www.google.com",
+//     relevantWork: "http://www.google.com",
+//     country: "United States",
+//     state: "New York",
+//     city: "New York",
+//   },
+//   {
+//     category: "Video",
+//     name: "Person Two",
+//     email: "Person@emmypark.com",
+//     phone: "111-444-3333",
+//     portfolio: "http://www.google.com",
+//     relevantWork: "http://www.google.com",
+//     country: "England",
+//     state: "",
+//     city: "London",
+//   },
+// ];
 //SELECT DOM ELEMENTS
 const talentList = document.querySelector(".talentList");
 
@@ -84,8 +84,8 @@ function createTalentList(dataArray) {
         <td></td>
         
         <td></td>
-        <td class="pt-3"><button><a href='${person.portfolio}'>Portfolio</a></button></td>
-        <td class="pt-3"><button><a href="${person.relevantWork}">Relevant Work</a></button></td>
+        <td class="pt-3"><button class="btn linkButtons"><a href='${person.portfolio}'>Portfolio</a></button></td>
+        <td class="pt-3"><button class="btn linkButtons"><a href="${person.pastWork}">Past Work</a></button></td>
         </tr>
       </tbody>`
   );

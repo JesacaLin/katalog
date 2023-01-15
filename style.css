@@ -63,7 +63,7 @@ a {
   border: 0;
   background: transparent;
 }
-
+/* BUTTONS INSIDE THE DIRECTORY */
 .btn {
   outline: none;
 }
@@ -133,10 +133,21 @@ input::placeholder {
   text-align: left;
 }
 
-.voteButton {
+.voteButton,
+.linkButtons {
   max-width: 100%;
-  width: 80px;
   background-color: white;
   border-radius: 25px;
+  box-shadow: 3px 3px 5px #f1f1f1;
+  padding: 0.5rem 1rem;
+}
+
+.voteButton {
+  width: 80px;
+
   font-weight: 600;
+}
+
+.linkButtons {
+  padding: 0 1rem;
 }
