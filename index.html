@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KATALOG</title>
+    <title>Katalog</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -44,20 +44,20 @@
             <img
               src="./assets/toggle.svg"
               class="add"
-              height="40"
+              height="35"
               alt="add"
               id="toggle"
             />
           </button>
           <a
-            href="https://github.com/JesacaLin/to-do-list-project"
+            href="https://github.com/JesacaLin/katalog"
             target="_blank"
             class="text-reset text-decoration-none d-flex align-items-center px-2 me-2"
           >
             <img
               src="https://raw.githubusercontent.com/JesacaLin/dev-kitty/9b9c8e0d370ed7f93549104a1d86771704043b87/public/img/Github.svg"
               class="add"
-              height="35"
+              height="30"
               alt="github link"
             />
           </a>
@@ -86,7 +86,7 @@
           <div class="row mt-5">
             <div class="d-flex flex-row justify-content-end">
               <button
-                class="btn button"
+                class="btn button btn-open"
                 data-bs-toggle="modal"
                 data-bs-target="#reg-modal"
               >
@@ -232,7 +232,7 @@
                               </div>
                               <div class="row justify-content-center my-5">
                                 <div class="col-lg-6">
-                                  <!-- phone -->
+                                  <!-- portfolio -->
                                   <label for="portfolio" class="form-label"
                                     >Portfolio</label
                                   >
@@ -253,7 +253,7 @@
 
                                 <div class="col-lg-6">
                                   <!-- portfolio -->
-                                  <label for="relevant-work" class="form-label"
+                                  <label for="relevantWork" class="form-label"
                                     >Relevant Work</label
                                   >
                                   <div class="mb-4 input-group">
@@ -263,7 +263,7 @@
                                     <input
                                       type="url"
                                       class="form-control"
-                                      id="relevant-work"
+                                      id="relevantWork"
                                       placeholder="http://"
                                       pattern="https?://.+"
                                       required
@@ -350,7 +350,9 @@
           </div>
           <!--LOOK -----------EACH FULL CARD HERE -------->
           <div class="cardContainer mt-5 px-4">
-            <table class="table table-borderless table-responsive-xxl">
+            <table
+              class="table table-borderless table-responsive-xxl talentList"
+            >
               <tbody>
                 <tr class="cardTop">
                   <th scope="row" class="tableName pt-4 ps-4">
@@ -360,7 +362,6 @@
                   <td></td>
                   <td></td>
                   <td></td>
-
                   <td class="pt-4">United States</td>
                   <td class="pt-4">Texas</td>
                   <td class="pt-4">Austin</td>
@@ -368,16 +369,19 @@
                 <tr>
                   <td class="pb-4 ps-4 pt-3">917-279-0866</td>
                   <td class="pt-3">Email</td>
-
                   <td></td>
                   <td></td>
-                  <td class="pt-3"><a href="/">Portfolio</a></td>
-                  <td class="pt-3"><a href="/">Relevant Work</a></td>
-                  <td class="">
-                    <button class="btn voteButton" id="voteUp">👍 8</button>
+                  <td class="pt-3">
+                    <button><a href="/">Portfolio</a></button>
+                  </td>
+                  <td class="pt-3">
+                    <button><a href="/">Relevant Work</a></button>
                   </td>
                   <td class="">
-                    <button class="btn voteButton" id="voteDown">
+                    <button class="btn voteButton" id="upVote">👍 8</button>
+                  </td>
+                  <td class="">
+                    <button class="btn voteButton" id="downVote">
                       <span class="">👎 2</span>
                     </button>
                   </td>
