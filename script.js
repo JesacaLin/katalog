@@ -38,7 +38,29 @@ const talentList = document.querySelector(".talentList");
 
 //CREATE DOM ELEMENTS: RENDER TALENT LIST
 talentList.innerHTML = "";
-createTalentList(initialPerson);
+
+//LOAD DATA FROM SUPABASE
+loadTalent();
+
+async function loadTalent() {
+  const res = await fetch(
+    "https://xmbmbdtgbybujizevhyc.supabase.co/rest/v1/Contributor",
+    {
+      headers: {
+        apikey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtYm1iZHRnYnlidWppemV2aHljIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM3NDI0NTcsImV4cCI6MTk4OTMxODQ1N30.yPMNK6UEyRtmZJ76PkMGtEyXGJpqHVUc4oZ0XlVxlnQ",
+        authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtYm1iZHRnYnlidWppemV2aHljIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM3NDI0NTcsImV4cCI6MTk4OTMxODQ1N30.yPMNK6UEyRtmZJ76PkMGtEyXGJpqHVUc4oZ0XlVxlnQ",
+      },
+    }
+  );
+  //TRANSLATE TO JSON
+  const data = await res.json();
+
+  createTalentList(data);
+}
+
+// createTalentList(initialPerson);
 
 function createTalentList(dataArray) {
   const htmlArr = dataArray.map(
