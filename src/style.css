@@ -133,6 +133,10 @@ input::placeholder {
   text-align: left;
 }
 
+.card-margin {
+  margin-bottom: 2rem !important;
+}
+
 .voteButton,
 .linkButtons {
   max-width: 100%;
@@ -144,7 +148,6 @@ input::placeholder {
 
 .voteButton {
   width: 80px;
-
   font-weight: 600;
 }
 
