@@ -44,6 +44,20 @@ const initialPerson = [
     upVote: 0,
     downVote: 0,
   },
+  {
+    id: 4,
+    category: "Stylist",
+    name: "Person Four",
+    email: "Person@park.com",
+    phone: "111-444-3333",
+    portfolio: "http://www.google.com",
+    relevantWork: "http://www.google.com",
+    country: "United States",
+    state: "New York",
+    city: "Brooklyn",
+    upVote: 0,
+    downVote: 0,
+  },
 ];
 
 function App() {
@@ -113,17 +127,6 @@ function App() {
     </>
   );
 }
-// The goal is to display states that the user entered rather than a predefined list of locations... will have to sort by input data...maybe using an if statement?
-
-// {
-//   talent.map((fact) => (
-//     <tbody className="mb-5" key={fact.id}>
-//       <Card fact={fact} />
-//     </tbody>
-//   ));
-// }
-
-/* Another thing is to make sure to filter out duplicate states, or check that the state is not empty or undefined before rendering the button, as you can see some of the states in the initialPerson array have empty strings or are not defined. */
 
 const LocationButton = ({ location }) => (
   <button className="button mt-4" id="states">
@@ -131,20 +134,55 @@ const LocationButton = ({ location }) => (
   </button>
 );
 
+//TODO-->filters out duplicates, empty values, undefined
+function LocationNav() {
+  const uniqueStates = [
+    ...new Set(
+      initialPerson
+        .filter((person) => person.state && person.state.length > 0)
+        .map((person) => person.state)
+    ),
+  ];
+  const uniqueCountries = [
+    ...new Set(
+      initialPerson
+        .filter((person) => person.country && person.country.length > 0)
+        .map((person) => person.country)
+    ),
+  ];
+  return (
+    <ul className="container-for-buttons mt-5">
+      <h6 className="location">UNITED STATES</h6>
+      {uniqueStates.map((state, index) => (
+        <LocationButton key={index} location={state} />
+      ))}
+      <h6 className="location mt-5">INTERNATIONAL</h6>
+      {uniqueCountries.map((country, index) => (
+        <LocationButton key={index} location={country} />
+      ))}
+    </ul>
+  );
+}
+
+//this code was unable to filter out duplicates
+/*
 function LocationNav() {
   return (
     <ul className="container-for-buttons mt-5">
       <h6 className="location">UNITED STATES</h6>
       {initialPerson
-        .filter((person) => person.state.length > 1)
+        .filter(
+          (person) => person.state.length > 1 && person.state !== undefined
+        )
         .map((person) => (
           <LocationButton key={person.id} location={person.state} />
         ))}
-      <h6 className="location">INTERNATIONAL</h6>
+      <h6 className="location mt-5">INTERNATIONAL</h6>
       {initialPerson
         .filter(
           (person) =>
             person.country.length > 1 &&
+            person.country !== undefined &&
             person.country.toLowerCase() !== "united states"
         )
         .map((person) => (
@@ -153,6 +191,7 @@ function LocationNav() {
     </ul>
   );
 }
+*/
 
 //THIS WORKS BUT IT'S MESSY
 /*
@@ -182,37 +221,6 @@ function LocationState() {
   );
 }
 */
-
-// function LocationInter() {
-//   // const locationState = initialPerson["state"];
-//   return (
-//     <ul className="container-for-buttons mt-5">
-//       <h6 className="location">UNITED STATES</h6>
-//       {initialPerson.map(
-//         (person) =>
-//           person.state.length > 1 && (
-//             <button key={person.id} className="button mt-4" id="states">
-//               {person.state}
-//             </button>
-//           )
-//       )}
-//     </ul>
-//   );
-// }
-
-// function LocationNav() {
-//   const locationState = initialPerson["state"];
-//   console.log(locationState);
-//   return (
-//     <ul className="container-for-buttons mt-5">
-//       <li>
-//         <button className="button mt-4" id="states">
-//           New York
-//         </button>
-//       </li>
-//     </ul>
-//   );
-// }
 
 function SearchBar() {
   return (
