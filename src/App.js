@@ -49,17 +49,16 @@ function App() {
       <main className="main container-fluid px-4 text-center">
         <div className="row mt-5">
           <aside className="sidenav col-lg-3 mt-5">
-            <LocationBar />
+            <LocationNav />
           </aside>
           <div className="col-lg-1 gap"></div>
           <section className="addSearchModalCards col-lg-8 mt-3">
             <aside className="row mt-5">
-              <AddAndSearchBar />
+              <SearchBar />
               <Modal />
             </aside>
-            <section className="cardContainer mt-5 px-4">
-              <Card />
-            </section>
+
+            <CardContainer />
           </section>
         </div>
       </main>
@@ -67,13 +66,13 @@ function App() {
   );
 }
 
-function LocationBar() {
+function LocationNav() {
   return <ul className="container-for-buttons mt-5">Location bar</ul>;
 }
 
-function AddAndSearchBar() {
+function SearchBar() {
   return (
-    <div class="addAndSearch d-flex flex-row justify-content-end">
+    <div className="addAndSearch d-flex flex-row justify-content-end">
       Add and search bar
     </div>
   );
@@ -82,16 +81,24 @@ function AddAndSearchBar() {
 function Modal() {
   return <section className="modal fade">modal</section>;
 }
-function Card() {
+
+function CardContainer() {
   return (
-    <table class="table table-borderless table-responsive-xxl talentList">
-      cards
-    </table>
+    <>
+      <section className="cardContainer mt-5 px-4">
+        Card Container
+        <Card />
+      </section>
+    </>
   );
 }
 
-// function CardContainer() {
-//   return <section className="cardContainer mt-5 px-4">cards</section>;
-// }
+function Card() {
+  return (
+    <table className="table table-borderless table-responsive-xxl talentList">
+      A card
+    </table>
+  );
+}
 
 export default App;
