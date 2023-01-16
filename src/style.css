@@ -1,19 +1,30 @@
-* {
+#root {
   margin: 0;
   padding: 0;
-}
-
-html {
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
   height: 100%;
   color: #222222;
 }
-*,
+
+/* html {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  height: 100%;
+  color: #222222;
+} */
+
+#root,
+#root:before,
+#root:after {
+  box-sizing: inherit;
+}
+
+/* *,
 *:before,
 *:after {
   box-sizing: inherit;
-}
+} */
 
 /* GROUP STYLES */
 .cards,
@@ -75,6 +86,7 @@ a {
 .cards {
   background-color: #f1f1f1;
   padding: 2.5rem;
+  border: 1px solid #222222;
 }
 
 /* LEFT SIDE BAR */
@@ -133,9 +145,9 @@ input::placeholder {
   text-align: left;
 }
 
-.card-margin {
-  margin-bottom: 2rem !important;
-}
+/* .card-margin {
+  margin-bottom: 6rem !important;
+} */
 
 .voteButton,
 .linkButtons {

@@ -29,6 +29,21 @@ const initialPerson = [
     upVote: 10,
     downVote: 0,
   },
+
+  {
+    id: 3,
+    category: "Stylist",
+    name: "Person Three",
+    email: "Person@park.com",
+    phone: "111-444-3333",
+    portfolio: "http://www.google.com",
+    relevantWork: "http://www.google.com",
+    country: "England",
+    state: "",
+    city: "London",
+    upVote: 0,
+    downVote: 0,
+  },
 ];
 
 function App() {
@@ -82,6 +97,8 @@ function App() {
         <div className="row mt-5">
           <aside className="sidenav col-lg-3 mt-5">
             <LocationNav />
+            {/* <LocationState /> */}
+            {/* <LocationInter /> */}
           </aside>
           <div className="col-lg-1 gap"></div>
           <section className="addSearchModalCards col-lg-8 mt-3">
@@ -96,10 +113,106 @@ function App() {
     </>
   );
 }
+// The goal is to display states that the user entered rather than a predefined list of locations... will have to sort by input data...maybe using an if statement?
+
+// {
+//   talent.map((fact) => (
+//     <tbody className="mb-5" key={fact.id}>
+//       <Card fact={fact} />
+//     </tbody>
+//   ));
+// }
+
+/* Another thing is to make sure to filter out duplicate states, or check that the state is not empty or undefined before rendering the button, as you can see some of the states in the initialPerson array have empty strings or are not defined. */
+
+const LocationButton = ({ location }) => (
+  <button className="button mt-4" id="states">
+    {location}
+  </button>
+);
 
 function LocationNav() {
-  return <ul className="container-for-buttons mt-5">Location bar</ul>;
+  return (
+    <ul className="container-for-buttons mt-5">
+      <h6 className="location">UNITED STATES</h6>
+      {initialPerson
+        .filter((person) => person.state.length > 1)
+        .map((person) => (
+          <LocationButton key={person.id} location={person.state} />
+        ))}
+      <h6 className="location">INTERNATIONAL</h6>
+      {initialPerson
+        .filter(
+          (person) =>
+            person.country.length > 1 &&
+            person.country.toLowerCase() !== "united states"
+        )
+        .map((person) => (
+          <LocationButton key={person.id} location={person.country} />
+        ))}
+    </ul>
+  );
 }
+
+//THIS WORKS BUT IT'S MESSY
+/*
+function LocationState() {
+  return (
+    <ul className="container-for-buttons mt-5">
+      <h6 className="location">UNITED STATES</h6>
+      {initialPerson.map(
+        (person) =>
+          person.state.length > 1 && (
+            <button key={person.id} className="button mt-4" id="states">
+              {person.state}
+            </button>
+          )
+      )}
+      <h6 className="location mt-5">INTERNATIONAL</h6>
+      {initialPerson.map(
+        (person) =>
+          person.country.length > 1 &&
+          person.country.toLowerCase() !== "united states" && (
+            <button key={person.id} className="button mt-4" id="states">
+              {person.country}
+            </button>
+          )
+      )}
+    </ul>
+  );
+}
+*/
+
+// function LocationInter() {
+//   // const locationState = initialPerson["state"];
+//   return (
+//     <ul className="container-for-buttons mt-5">
+//       <h6 className="location">UNITED STATES</h6>
+//       {initialPerson.map(
+//         (person) =>
+//           person.state.length > 1 && (
+//             <button key={person.id} className="button mt-4" id="states">
+//               {person.state}
+//             </button>
+//           )
+//       )}
+//     </ul>
+//   );
+// }
+
+// function LocationNav() {
+//   const locationState = initialPerson["state"];
+//   console.log(locationState);
+//   return (
+//     <ul className="container-for-buttons mt-5">
+//       <li>
+//         <button className="button mt-4" id="states">
+//           New York
+//         </button>
+//       </li>
+//     </ul>
+//   );
+// }
 
 function SearchBar() {
   return (
@@ -120,7 +233,9 @@ function CardContainer() {
     <section className="cardContainer mt-5 px-4">
       <table className="table table-borderless table-responsive-xxl talentList">
         {talent.map((fact) => (
-          <Card fact={fact} />
+          <tbody className="mb-5" key={fact.id}>
+            <Card fact={fact} />
+          </tbody>
         ))}
       </table>
     </section>
@@ -129,7 +244,7 @@ function CardContainer() {
 
 function Card({ fact }) {
   return (
-    <tbody key={fact.id} className="card-margin ">
+    <>
       <tr className="cardTop">
         <th scope="row" className="tableName pt-4 ps-4">
           <h5 className="name">{fact.name}</h5>
@@ -168,7 +283,7 @@ function Card({ fact }) {
           </button>
         </td>
       </tr>
-    </tbody>
+    </>
   );
 }
 
