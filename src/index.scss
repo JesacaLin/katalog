@@ -1,11 +1,11 @@
-/* #root {
+#root {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
   height: 100%;
   color: #222222;
-} */
+}
 
 html {
   box-sizing: border-box;
@@ -14,11 +14,11 @@ html {
   color: #222222;
 }
 
-/* #root,
+#root,
 #root:before,
 #root:after {
   box-sizing: inherit;
-} */
+}
 
 *,
 *:before,
@@ -32,8 +32,7 @@ html {
 .cardContainer,
 .sidenav,
 .table,
-#states,
-#searchBar {
+#states {
   border-radius: 25px;
 }
 
@@ -61,6 +60,8 @@ body {
 .navbar {
   border-bottom: 2px solid #222222;
   position: sticky;
+  /* background-color: #f1f1f1; */
+  /* background-color: white; */
 }
 
 /* How to indicate something is a link? */
@@ -145,26 +146,23 @@ input::placeholder {
 }
 
 /* .card-margin {
-  margin-bottom: 6rem !important;
-} */
+    margin-bottom: 6rem !important;
+  } */
 
-#upVote,
-#downVote {
-  width: 80px;
-  font-weight: 600;
+.voteButton,
+.linkButtons {
   max-width: 100%;
   background-color: white;
   border-radius: 25px;
-  box-shadow: 3px 3px 5px #ecebeb;
+  box-shadow: 3px 3px 5px #f1f1f1;
   padding: 0.5rem 1rem;
 }
 
-#portfolio,
-#pastWork {
+.voteButton {
+  width: 80px;
+  font-weight: 600;
+}
+
+.linkButtons {
   padding: 0 1rem;
-  max-width: 100%;
-  background-color: white;
-  border-radius: 25px;
-  box-shadow: 3px 3px 5px #ecebeb;
-  padding: 0.5rem 1rem;
 }

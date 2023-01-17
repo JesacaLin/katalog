@@ -1,5 +1,12 @@
 import React, { useState } from "react";
+// import styled from "styled-components";
 import "./style.css";
+
+// const LinkButton = styled.button`
+//   padding: 0 1rem;
+//   outline: none;
+
+// `;
 
 const initialPerson = [
   {
@@ -30,35 +37,6 @@ const initialPerson = [
     upVote: 10,
     downVote: 0,
   },
-
-  {
-    id: 3,
-    category: "Stylist",
-    name: "Person Three",
-    email: "Person@park.com",
-    phone: "111-444-3333",
-    portfolio: "http://www.google.com",
-    relevantWork: "http://www.google.com",
-    country: "England",
-    state: "",
-    city: "London",
-    upVote: 0,
-    downVote: 0,
-  },
-  {
-    id: 4,
-    category: "Stylist",
-    name: "Person Four",
-    email: "Person@park.com",
-    phone: "111-444-3333",
-    portfolio: "http://www.google.com",
-    relevantWork: "http://www.google.com",
-    country: "United States",
-    state: "New York",
-    city: "Brooklyn",
-    upVote: 0,
-    downVote: 0,
-  },
 ];
 
 function App() {
@@ -85,7 +63,7 @@ function App() {
             </button>
             <button className="button d-flex align-items-center px-2">
               <img
-                src="/assets/toggle.svg"
+                src="./assets/toggle.svg"
                 className="add"
                 height="35"
                 alt="add"
@@ -95,7 +73,7 @@ function App() {
             <a
               href="https://github.com/JesacaLin/katalog"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="text-reset text-decoration-none d-flex align-items-center px-2 me-2"
             >
               <img
@@ -108,6 +86,7 @@ function App() {
           </div>
         </div>
       </nav>
+
       <main className="main container-fluid px-4 text-center">
         <div className="row mt-5">
           <aside className="sidenav col-lg-3 mt-5">
@@ -117,7 +96,6 @@ function App() {
           <section className="addSearchModalCards col-lg-8 mt-3">
             <aside className="row mt-5">
               <SearchBar />
-              <Modal />
             </aside>
             <CardContainer />
           </section>
@@ -168,64 +146,6 @@ function LocationNav() {
   );
 }
 
-//this code was unable to filter out duplicates
-/*
-function LocationNav() {
-  return (
-    <ul className="container-for-buttons mt-5">
-      <h6 className="location">UNITED STATES</h6>
-      {initialPerson
-        .filter(
-          (person) => person.state.length > 1 && person.state !== undefined
-        )
-        .map((person) => (
-          <LocationButton key={person.id} location={person.state} />
-        ))}
-      <h6 className="location mt-5">INTERNATIONAL</h6>
-      {initialPerson
-        .filter(
-          (person) =>
-            person.country.length > 1 &&
-            person.country !== undefined &&
-            person.country.toLowerCase() !== "united states"
-        )
-        .map((person) => (
-          <LocationButton key={person.id} location={person.country} />
-        ))}
-    </ul>
-  );
-}
-*/
-
-//THIS WORKS BUT IT'S MESSY
-/*
-function LocationState() {
-  return (
-    <ul className="container-for-buttons mt-5">
-      <h6 className="location">UNITED STATES</h6>
-      {initialPerson.map(
-        (person) =>
-          person.state.length > 1 && (
-            <button key={person.id} className="button mt-4" id="states">
-              {person.state}
-            </button>
-          )
-      )}
-      <h6 className="location mt-5">INTERNATIONAL</h6>
-      {initialPerson.map(
-        (person) =>
-          person.country.length > 1 &&
-          person.country.toLowerCase() !== "united states" && (
-            <button key={person.id} className="button mt-4" id="states">
-              {person.country}
-            </button>
-          )
-      )}
-    </ul>
-  );
-}
-*/
-
 function SearchBar() {
   return (
     <div className="addAndSearch d-flex flex-row justify-content-end">
@@ -267,221 +187,6 @@ function SearchBar() {
   );
 }
 
-function Modal() {
-  return (
-    <section
-      className="modal fade"
-      id="reg-modal"
-      //changing from tabindex to tabIndex
-      tabIndex="-1"
-      aria-labelledby="modal-title"
-      aria-hidden="true"
-      data-backdrop="static"
-      data-keyboard="false"
-    >
-      <div className="modal-dialog modal-dialog-centered modal-lg m-auto">
-        <div className="modal-content">
-          <div className="modal-header">
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">
-            <div className="container-fluid">
-              <div>
-                <h6 className="m-2 modal-title" id="modal-title">
-                  ADD A CONTRIBUTOR
-                </h6>
-                <span>* indicate mandatory field</span>
-              </div>
-              <div className="row justify-content-center my-5">
-                <form>
-                  <div className="col-lg-12">
-                    <div className="col-lg-4 mx-auto">
-                      <label htmlFor="category" className="form-label">
-                        Select a talent category*
-                      </label>
-                      <div className="mb-4 input-group">
-                        <span className="input-group-text">
-                          <i className="bi bi-tag-fill"></i>
-                        </span>
-                        <select className="form-select mx-auto" id="category">
-                          <option value="photo" selected>
-                            Photo
-                          </option>
-                          <option value="video">Video</option>
-                          <option value="stylist">Stylist</option>
-                          <option value="makeup">Makeup</option>
-                          <option value="hair">Hair Stylist</option>
-                          <option value="assistant">Assistant</option>
-                          <option value="other">Other</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="row justify-content-center my-5">
-                      <div className="col-lg-4">
-                        <label htmlFor="name" className="form-label float-left">
-                          Name*
-                        </label>
-                        <div className="mb-4 input-group">
-                          <span className="input-group-text">
-                            <i className="bi bi-person-fill"></i>
-                          </span>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="name"
-                            placeholder="Bob Bobster"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <label htmlFor="email" className="form-label">
-                          Email*
-                        </label>
-                        <div className="mb-4 input-group">
-                          <span className="input-group-text">
-                            <i className="bi bi-envelope-fill"></i>
-                          </span>
-                          <input
-                            type="email"
-                            className="form-control"
-                            id="email"
-                            placeholder="bob@bobster.com"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <label htmlFor="phone" className="form-label">
-                          Phone Number*
-                        </label>
-                        <div className="mb-4 input-group">
-                          <span className="input-group-text">
-                            <i className="bi bi-telephone-fill"></i>
-                          </span>
-                          <input
-                            type="tel"
-                            className="form-control"
-                            id="phone"
-                            placeholder="xxx-xxx-xxxx"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row justify-content-center my-5">
-                      <div className="col-lg-6">
-                        <label htmlFor="portfolio" className="form-label">
-                          Portfolio
-                        </label>
-                        <div className="mb-4 input-group">
-                          <span className="input-group-text">
-                            <i className="bi bi-star-fill"></i>
-                          </span>
-                          <input
-                            type="url"
-                            className="form-control"
-                            id="portfolio"
-                            placeholder="http://"
-                            pattern="https?://.+"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="col-lg-6">
-                        <label htmlFor="relevantWork" className="form-label">
-                          Relevant Work
-                        </label>
-                        <div className="mb-4 input-group">
-                          <span className="input-group-text">
-                            <i className="bi bi-stars"></i>
-                          </span>
-                          <input
-                            type="url"
-                            className="form-control"
-                            id="relevantWork"
-                            placeholder="http://"
-                            pattern="https?://.+"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="row justify-content-center my-5">
-                        <div className="col-lg-4">
-                          <label htmlFor="country" className="form-label">
-                            Country*
-                          </label>
-                          <div className="mb-4 input-group">
-                            <span className="input-group-text">
-                              <i className="bi bi-geo-alt-fill"></i>
-                            </span>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="country"
-                              value="United States"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-lg-4">
-                          <label htmlFor="state" className="form-label">
-                            State*
-                          </label>
-                          <div className="mb-4 input-group">
-                            <span className="input-group-text">
-                              <i className="bi bi-geo-alt-fill"></i>
-                            </span>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="state"
-                              placeholder="If applicable..."
-                            />
-                          </div>
-                        </div>
-                        <div className="col-lg-4">
-                          <label htmlFor="city" className="form-label">
-                            City*
-                          </label>
-                          <div className="input-group">
-                            <span className="input-group-text">
-                              <i className="bi bi-geo-alt-fill"></i>
-                            </span>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="city"
-                              placeholder="Austin"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn modalBTN btn-outline-dark">
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="btn modalBTN btn-outline-dark ms-3"
-            >
-              Add
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function CardContainer() {
   const talent = initialPerson;
 
@@ -513,29 +218,40 @@ function Card({ fact }) {
         <td className="pt-4">{fact.state}</td>
         <td className="pt-4">{fact.city}</td>
       </tr>
-      <tr>
+      <tr className="cardBottom">
         <td className="pb-4 ps-4 pt-3">{fact.phone}</td>
         <td className="pt-3">{fact.email}</td>
         <td></td>
         <td></td>
-        <td className="pt-3">
-          <button className="btn linkButtons">
-            <a href={fact.portfolio}>Portfolio</a>
+        {/* this pb-4 expands the bottom of the cards */}
+        <td className="pb-4">
+          <button className="btn linkButtons" id="portfolio">
+            <a href={fact.portfolio} target="_blank" rel="noopener noreferrer">
+              Portfolio
+            </a>
           </button>
         </td>
-        <td className="pt-3">
-          <button className="btn linkButtons">
-            <a href={fact.pastWork}>Past Work</a>
+        <td>
+          <button className="btn linkButtons" id="pastWork">
+            <a href={fact.pastWork} target="_blank" rel="noopener noreferrer">
+              Past Work
+            </a>
           </button>
         </td>
-        <td className="">
+        <td>
           <button className="btn voteButton" id="upVote">
-            👍 {fact.upVote}
+            <span role="img" aria-label="thumbs up">
+              {" "}
+              👍 {fact.upVote}{" "}
+            </span>
           </button>
         </td>
-        <td className="">
+        <td>
           <button className="btn voteButton" id="downVote">
-            👎 {fact.downVote}
+            <span role="img" aria-label="thumbs down">
+              {" "}
+              👎 {fact.downVote}{" "}
+            </span>
           </button>
         </td>
       </tr>
