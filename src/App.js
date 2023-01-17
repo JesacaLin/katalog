@@ -16,7 +16,7 @@ const initialPerson = [
     email: "Emmy@emmypark.com",
     phone: "111-222-3333",
     portfolio: "http://www.google.com",
-    relevantWork: "http://www.google.com",
+    pastWork: "http://www.google.com",
     country: "United States",
     state: "New York",
     city: "New York",
@@ -30,7 +30,7 @@ const initialPerson = [
     email: "Person@emmypark.com",
     phone: "111-444-3333",
     portfolio: "http://www.google.com",
-    relevantWork: "http://www.google.com",
+    pastWork: "http://www.google.com",
     country: "England",
     state: "",
     city: "London",
@@ -40,6 +40,8 @@ const initialPerson = [
 ];
 
 function App() {
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <>
       {/* HEADER */}
@@ -86,7 +88,6 @@ function App() {
           </div>
         </div>
       </nav>
-
       <main className="main container-fluid px-4 text-center">
         <div className="row mt-5">
           <aside className="sidenav col-lg-3 mt-5">
@@ -95,7 +96,46 @@ function App() {
           <div className="col-lg-1 gap"></div>
           <section className="addSearchModalCards col-lg-8 mt-3">
             <aside className="row mt-5">
-              <SearchBar />
+              {/* <SearchBar /> */}
+              <div className="addAndSearch d-flex flex-row justify-content-end">
+                <button
+                  className="btn button btn-open"
+                  onClick={function () {
+                    setShowForm((show) => !show);
+                  }}
+                >
+                  <img
+                    src="./assets/add-dark.svg"
+                    className="add d-inline-block align-items-center"
+                    height="25"
+                    alt="add"
+                    id="add"
+                  />
+                  <span className="align-items-center fs-6 m-2 add-contributor">
+                    ADD A CONTRIBUTOR
+                  </span>
+                </button>
+                <form className="d-flex pe-2" role="search">
+                  <input
+                    className="form-control"
+                    type="search"
+                    placeholder="Search..."
+                    aria-label="Search"
+                    id="searchBar"
+                  />
+                  <button className="btn btn-no-outline" type="submit">
+                    <img
+                      src="./assets/search.svg"
+                      className="d-inline-block align-text-top px-2"
+                      height="25"
+                      alt="search"
+                      id="searchIcon"
+                    />
+                  </button>
+                </form>
+              </div>
+              {/* TURN THE FORM ON AND OFF */}
+              {showForm ? <AddTalentForm /> : null}
             </aside>
             <CardContainer />
           </section>
@@ -104,6 +144,50 @@ function App() {
     </>
   );
 }
+
+// function SearchBar({ setShowForm }) {
+//   return (
+//     <div className="addAndSearch d-flex flex-row justify-content-end">
+//       <button
+//         className="btn button btn-open"
+//         // data-bs-toggle="modal"
+//         // data-bs-target="#reg-modal"
+//         onClick={function () {
+//           setShowForm((show) => !show);
+//         }}
+//       >
+//         <img
+//           src="./assets/add-dark.svg"
+//           className="add d-inline-block align-items-center"
+//           height="25"
+//           alt="add"
+//           id="add"
+//         />
+//         <span className="align-items-center fs-6 m-2 add-contributor">
+//           ADD A CONTRIBUTOR
+//         </span>
+//       </button>
+//       <form className="d-flex pe-2" role="search">
+//         <input
+//           className="form-control"
+//           type="search"
+//           placeholder="Search..."
+//           aria-label="Search"
+//           id="searchBar"
+//         />
+//         <button className="btn btn-no-outline" type="submit">
+//           <img
+//             src="./assets/search.svg"
+//             className="d-inline-block align-text-top px-2"
+//             height="25"
+//             alt="search"
+//             id="searchIcon"
+//           />
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
 
 const LocationButton = ({ location }) => (
   <button className="button mt-4" id="states">
@@ -146,43 +230,193 @@ function LocationNav() {
   );
 }
 
-function SearchBar() {
+function AddTalentForm() {
   return (
-    <div className="addAndSearch d-flex flex-row justify-content-end">
-      <button
-        className="btn button btn-open"
-        data-bs-toggle="modal"
-        data-bs-target="#reg-modal"
-      >
-        <img
-          src="./assets/add-dark.svg"
-          className="add d-inline-block align-items-center"
-          height="25"
-          alt="add"
-          id="add"
-        />
-        <span className="align-items-center fs-6 m-2 add-contributor">
-          ADD A CONTRIBUTOR
-        </span>
-      </button>
-      <form className="d-flex pe-2" role="search">
-        <input
-          className="form-control"
-          type="search"
-          placeholder="Search..."
-          aria-label="Search"
-          id="searchBar"
-        />
-        <button className="btn btn-no-outline" type="submit">
-          <img
-            src="./assets/search.svg"
-            className="d-inline-block align-text-top px-2"
-            height="25"
-            alt="search"
-            id="searchIcon"
-          />
-        </button>
-      </form>
+    <div className="modal-body mt-5" id="formBody">
+      <div className="container-fluid">
+        <div>
+          <h6 className="m-2 modal-title" id="modal-title">
+            ADD A CONTRIBUTOR
+          </h6>
+          <span>* indicate mandatory field</span>
+        </div>
+        <div className="row justify-content-center my-5">
+          <form>
+            <div className="col-lg-12">
+              <div className="col-lg-4 mx-auto">
+                <label htmlFor="category" className="form-label">
+                  Select a talent category*
+                </label>
+                <div className="mb-4 input-group">
+                  <span className="input-group-text">
+                    <i className="bi bi-tag-fill"></i>
+                  </span>
+                  <select className="form-select mx-auto" id="category">
+                    <option value="photo" selected>
+                      Photo
+                    </option>
+                    <option value="video">Video</option>
+                    <option value="stylist">Stylist</option>
+                    <option value="makeup">Makeup</option>
+                    <option value="hair">Hair Stylist</option>
+                    <option value="assistant">Assistant</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="row justify-content-center my-5">
+                <div className="col-lg-4">
+                  <label htmlFor="name" className="form-label float-left">
+                    Name*
+                  </label>
+                  <div className="mb-4 input-group">
+                    <span className="input-group-text">
+                      <i className="bi bi-person-fill"></i>
+                    </span>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      placeholder="Bob Bobster"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-4">
+                  <label htmlFor="email" className="form-label">
+                    Email*
+                  </label>
+                  <div className="mb-4 input-group">
+                    <span className="input-group-text">
+                      <i className="bi bi-envelope-fill"></i>
+                    </span>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="bob@bobster.com"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-4">
+                  <label htmlFor="phone" className="form-label">
+                    Phone Number*
+                  </label>
+                  <div className="mb-4 input-group">
+                    <span className="input-group-text">
+                      <i className="bi bi-telephone-fill"></i>
+                    </span>
+                    <input
+                      type="tel"
+                      className="form-control"
+                      id="phone"
+                      placeholder="xxx-xxx-xxxx"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row justify-content-center my-5">
+                <div className="col-lg-6">
+                  <label htmlFor="portfolio" className="form-label">
+                    Portfolio
+                  </label>
+                  <div className="mb-4 input-group">
+                    <span className="input-group-text">
+                      <i className="bi bi-star-fill"></i>
+                    </span>
+                    <input
+                      type="url"
+                      className="form-control"
+                      id="portfolio"
+                      placeholder="http://"
+                      pattern="https?://.+"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="col-lg-6">
+                  <label htmlFor="relevantWork" className="form-label">
+                    Relevant Work
+                  </label>
+                  <div className="mb-4 input-group">
+                    <span className="input-group-text">
+                      <i className="bi bi-stars"></i>
+                    </span>
+                    <input
+                      type="url"
+                      className="form-control"
+                      id="relevantWork"
+                      placeholder="http://"
+                      pattern="https?://.+"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="row justify-content-center my-5">
+                  <div className="col-lg-4">
+                    <label htmlFor="country" className="form-label">
+                      Country*
+                    </label>
+                    <div className="mb-4 input-group">
+                      <span className="input-group-text">
+                        <i className="bi bi-geo-alt-fill"></i>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="country"
+                        value="United States"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <label htmlFor="state" className="form-label">
+                      State*
+                    </label>
+                    <div className="mb-4 input-group">
+                      <span className="input-group-text">
+                        <i className="bi bi-geo-alt-fill"></i>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="state"
+                        placeholder="If applicable..."
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <label htmlFor="city" className="form-label">
+                      City*
+                    </label>
+                    <div className="input-group">
+                      <span className="input-group-text">
+                        <i className="bi bi-geo-alt-fill"></i>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="city"
+                        placeholder="Austin"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div className="modal-footer">
+          <button type="button" className="btn modalBTN btn-outline-dark">
+            Cancel
+          </button>
+          <button type="submit" className="btn modalBTN btn-outline-dark ms-3">
+            Add
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
