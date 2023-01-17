@@ -40,6 +40,7 @@ const initialPerson = [
 ];
 
 function App() {
+  //1. DEFINE STATE VARIABLE
   const [showForm, setShowForm] = useState(false);
 
   return (
@@ -100,6 +101,7 @@ function App() {
               <div className="addAndSearch d-flex flex-row justify-content-end">
                 <button
                   className="btn button btn-open"
+                  //LOOK - 3. UPDATE STATE VARIABLE - ON CLICK
                   onClick={function () {
                     setShowForm((show) => !show);
                   }}
@@ -134,8 +136,8 @@ function App() {
                   </button>
                 </form>
               </div>
-              {/* TURN THE FORM ON AND OFF */}
-              {showForm ? <AddTalentForm /> : null}
+              {/* LOOK 2. USE STATE VARIABLE - TURN THE FORM ON AND OFF */}
+              {showForm ? <AddTalentForm setShowForm={setShowForm} /> : null}
             </aside>
             <CardContainer />
           </section>
@@ -230,9 +232,9 @@ function LocationNav() {
   );
 }
 
-function AddTalentForm() {
+function AddTalentForm({ setShowForm }) {
   return (
-    <div className="modal-body mt-5" id="formBody">
+    <div className="modal-body mt-5 me-2" id="formBody">
       <div className="container-fluid">
         <div>
           <h6 className="m-2 modal-title" id="modal-title">
@@ -409,10 +411,14 @@ function AddTalentForm() {
         </div>
 
         <div className="modal-footer">
-          <button type="button" className="btn modalBTN btn-outline-dark">
+          <button
+            type="button"
+            className="btn modalBTN btny-outline-dark"
+            onClick={() => setShowForm(false)}
+          >
             Cancel
           </button>
-          <button type="submit" className="btn modalBTN btn-outline-dark ms-3">
+          <button type="submit" className="btn modalBTN btn-dark ms-3">
             Add
           </button>
         </div>
