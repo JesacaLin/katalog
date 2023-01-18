@@ -54,48 +54,7 @@ function App() {
           <div className="col-lg-1 gap"></div>
           <section className="addSearchModalCards col-lg-8 mt-3">
             <aside className="row mt-5">
-              {/* <SearchBar /> */}
-              <div className="addAndSearch d-flex flex-row justify-content-end">
-                <button
-                  className="btn button btn-open"
-                  //LOOK - 3. UPDATE STATE VARIABLE - ON CLICK
-                  onClick={function () {
-                    setShowForm((show) => !show);
-                  }}
-                >
-                  <img
-                    src="./assets/add-dark.svg"
-                    className="add d-inline-block align-items-center"
-                    height="25"
-                    alt="add"
-                    id="add"
-                  />
-                  <span className="align-items-center fs-6 m-2 add-contributor">
-                    {/* TOGGLES THE FORM */}
-                    {showForm ? "CLOSE FORM" : "ADD A CONTRIBUTOR"}
-                  </span>
-                </button>
-                <form className="d-flex pe-2" role="search">
-                  <input
-                    className="form-control"
-                    type="search"
-                    placeholder="Search..."
-                    aria-label="Search"
-                    id="searchBar"
-                  />
-                  <button className="btn btn-no-outline" type="submit">
-                    <img
-                      src="./assets/search.svg"
-                      className="d-inline-block align-text-top px-2"
-                      height="25"
-                      alt="search"
-                      id="searchIcon"
-                    />
-                  </button>
-                </form>
-              </div>
-              {/* LOOK 2. USE STATE VARIABLE - TURN THE FORM ON AND OFF */}
-              {showForm ? <AddTalentForm setShowForm={setShowForm} /> : null}
+              <SearchBar setShowForm={setShowForm} showForm={showForm} />
             </aside>
             <CardContainer />
           </section>
@@ -104,50 +63,6 @@ function App() {
     </>
   );
 }
-
-// function SearchBar({ setShowForm }) {
-//   return (
-//     <div className="addAndSearch d-flex flex-row justify-content-end">
-//       <button
-//         className="btn button btn-open"
-//         // data-bs-toggle="modal"
-//         // data-bs-target="#reg-modal"
-//         onClick={function () {
-//           setShowForm((show) => !show);
-//         }}
-//       >
-//         <img
-//           src="./assets/add-dark.svg"
-//           className="add d-inline-block align-items-center"
-//           height="25"
-//           alt="add"
-//           id="add"
-//         />
-//         <span className="align-items-center fs-6 m-2 add-contributor">
-//           ADD A CONTRIBUTOR
-//         </span>
-//       </button>
-//       <form className="d-flex pe-2" role="search">
-//         <input
-//           className="form-control"
-//           type="search"
-//           placeholder="Search..."
-//           aria-label="Search"
-//           id="searchBar"
-//         />
-//         <button className="btn btn-no-outline" type="submit">
-//           <img
-//             src="./assets/search.svg"
-//             className="d-inline-block align-text-top px-2"
-//             height="25"
-//             alt="search"
-//             id="searchIcon"
-//           />
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
 
 function Header() {
   const appTitle = "KATALOG";
@@ -241,9 +156,57 @@ function LocationNav() {
   );
 }
 
+function SearchBar({ setShowForm, showForm }) {
+  return (
+    <aside className="row mt-5">
+      <div className="addAndSearch d-flex flex-row justify-content-end">
+        <button
+          className="btn button btn-open"
+          //LOOK - 3. UPDATE STATE VARIABLE - ON CLICK
+          onClick={function () {
+            setShowForm((show) => !show);
+          }}
+        >
+          <img
+            src="./assets/add-dark.svg"
+            className="add d-inline-block align-items-center"
+            height="25"
+            alt="add"
+            id="add"
+          />
+          <span className="align-items-center fs-6 m-2 add-contributor">
+            {/* TOGGLES THE FORM */}
+            {showForm ? "CLOSE FORM" : "ADD A CONTRIBUTOR"}
+          </span>
+        </button>
+        <form className="d-flex pe-2" role="search">
+          <input
+            className="form-control"
+            type="search"
+            placeholder="Search..."
+            aria-label="Search"
+            id="searchBar"
+          />
+          <button className="btn btn-no-outline" type="submit">
+            <img
+              src="./assets/search.svg"
+              className="d-inline-block align-text-top px-2"
+              height="25"
+              alt="search"
+              id="searchIcon"
+            />
+          </button>
+        </form>
+      </div>
+      {/* LOOK 2. USE STATE VARIABLE - TURN THE FORM ON AND OFF */}
+      {showForm ? <AddTalentForm setShowForm={setShowForm} /> : null}
+    </aside>
+  );
+}
+
 function AddTalentForm({ setShowForm }) {
   return (
-    <div className="modal-body mt-5 me-2" id="formBody">
+    <div className="modal-body mt-5" id="formBody">
       <div className="container-fluid">
         <div>
           <h6 className="m-2 modal-title" id="modal-title">
@@ -346,8 +309,8 @@ function AddTalentForm({ setShowForm }) {
                 </div>
 
                 <div className="col-lg-6">
-                  <label htmlFor="relevantWork" className="form-label">
-                    Relevant Work
+                  <label htmlFor="pastWork" className="form-label">
+                    Past Work
                   </label>
                   <div className="mb-4 input-group">
                     <span className="input-group-text">
@@ -356,7 +319,7 @@ function AddTalentForm({ setShowForm }) {
                     <input
                       type="url"
                       className="form-control"
-                      id="relevantWork"
+                      id="pastWork"
                       placeholder="http://"
                       pattern="https?://.+"
                       required
@@ -454,55 +417,64 @@ function CardContainer() {
 function Card({ fact }) {
   return (
     <>
-      <tr className="cardTop">
-        <th scope="row" className="tableName pt-4 ps-4">
-          <h5 className="name">{fact.name}</h5>
-        </th>
-        <td className="pt-4">{fact.category}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td className="pt-4">{fact.country}</td>
-        <td className="pt-4">{fact.state}</td>
-        <td className="pt-4">{fact.city}</td>
-      </tr>
-      <tr className="cardBottom">
-        <td className="pb-4 ps-4 pt-3">{fact.phone}</td>
-        <td className="pt-3">{fact.email}</td>
-        <td></td>
-        <td></td>
-        {/* this pb-4 expands the bottom of the cards */}
-        <td className="pb-4">
-          <button className="btn linkButtons" id="portfolio">
-            <a href={fact.portfolio} target="_blank" rel="noopener noreferrer">
-              Portfolio
-            </a>
-          </button>
-        </td>
-        <td>
-          <button className="btn linkButtons" id="pastWork">
-            <a href={fact.pastWork} target="_blank" rel="noopener noreferrer">
-              Past Work
-            </a>
-          </button>
-        </td>
-        <td>
-          <button className="btn voteButton" id="upVote">
-            <span role="img" aria-label="thumbs up">
-              {" "}
-              👍 {fact.upVote}{" "}
-            </span>
-          </button>
-        </td>
-        <td>
-          <button className="btn voteButton" id="downVote">
-            <span role="img" aria-label="thumbs down">
-              {" "}
-              👎 {fact.downVote}{" "}
-            </span>
-          </button>
-        </td>
-      </tr>
+      <section class="innerCardContainer mt-3 px-4">
+        <table class="table table-borderless table-responsive-xxl talentList">
+          <tbody>
+            <tr className="cardTop">
+              <th scope="row" className="tableName pt-4 ps-4">
+                <h5 className="name">{fact.name}</h5>
+              </th>
+              <td className="pt-4">{fact.category}</td>
+              <td className="pt-4">{fact.country}</td>
+              <td className="pt-4">{fact.state}</td>
+              <td className="pt-4">{fact.city}</td>
+            </tr>
+            <tr className="cardBottom">
+              <td className="pb-4 ps-4 pt-3">{fact.phone}</td>
+              <td className="pt-3">{fact.email}</td>
+
+              {/* this pb-4 expands the bottom of the cards */}
+              <td className="pb-4">
+                <button className="btn linkButtons" id="portfolioBTN">
+                  <a
+                    href={fact.portfolio}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Portfolio</span>
+                  </a>
+                </button>
+              </td>
+              <td>
+                <button className="btn linkButtons" id="pastWorkBTN">
+                  <a
+                    href={fact.pastWork}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Past Work</span>
+                  </a>
+                </button>
+              </td>
+              <td>
+                <button className="btn voteButton me-1" id="upVote">
+                  <span role="img" aria-label="thumbs up">
+                    {" "}
+                    👍 {fact.upVote}{" "}
+                  </span>
+                </button>
+
+                <button className="btn voteButton" id="downVote">
+                  <span role="img" aria-label="thumbs down">
+                    {" "}
+                    👎 {fact.downVote}{" "}
+                  </span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </>
   );
 }

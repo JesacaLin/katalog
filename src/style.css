@@ -34,7 +34,8 @@ html {
 .table,
 #states,
 #searchBar,
-#formBody {
+#formBody,
+.innerCardContainer {
   border-radius: 25px;
 }
 
@@ -84,9 +85,9 @@ a {
 }
 
 .cards {
-  background-color: #f1f1f1;
-  padding: 2.5rem;
-  border: 1px solid #222222;
+  /* background-color: #f1f1f1; */
+  /* padding: 2.5rem; */
+  /* border: 1px solid #222222; */
 }
 
 /* LEFT SIDE BAR */
@@ -129,7 +130,7 @@ input::placeholder {
 .modal-body {
   border-color: transparent;
 }
-.form-control,
+
 .input-group-text,
 .form-select,
 .btn-outline-dark {
@@ -144,14 +145,20 @@ input::placeholder {
   padding: 2.5rem;
 }
 
+.innerCardContainer {
+  /* outline: 2px solid #222222; */
+  background-color: #f1f1f1;
+}
+
 #searchIcon {
   border: none;
   stroke: none;
 }
 
 .table {
-  background-color: #f1f1f1;
-  text-align: left;
+  /* background-color: #f1f1f1; */
+  text-align: center;
+  /* border-collapse: collapse; */
 }
 
 /* .card-margin {
@@ -166,15 +173,15 @@ input::placeholder {
   background-color: white;
   border-radius: 25px;
   box-shadow: 3px 3px 5px #ecebeb;
-  padding: 0.5rem 1rem;
+  /* padding: 0.5rem 1rem; */
 }
 
-#portfolio,
-#pastWork {
-  padding: 0 1rem;
-  max-width: 100%;
+#portfolioBTN,
+#pastWorkBTN {
+  /* padding: 0 1rem; */
+  width: 100%;
   background-color: white;
   border-radius: 25px;
   box-shadow: 3px 3px 5px #ecebeb;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 1.5rem;
 }
