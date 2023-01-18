@@ -44,13 +44,12 @@ loadTalent();
 
 async function loadTalent() {
   const res = await fetch(
-    "https://xmbmbdtgbybujizevhyc.supabase.co/rest/v1/Contributor",
+    
     {
       headers: {
-        apikey:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtYm1iZHRnYnlidWppemV2aHljIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM3NDI0NTcsImV4cCI6MTk4OTMxODQ1N30.yPMNK6UEyRtmZJ76PkMGtEyXGJpqHVUc4oZ0XlVxlnQ",
+       
         authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtYm1iZHRnYnlidWppemV2aHljIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzM3NDI0NTcsImV4cCI6MTk4OTMxODQ1N30.yPMNK6UEyRtmZJ76PkMGtEyXGJpqHVUc4oZ0XlVxlnQ",
+         
       },
     }
   );
