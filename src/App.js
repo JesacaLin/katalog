@@ -209,199 +209,235 @@ function SearchBar({ setShowForm, showForm }) {
 }
 
 function AddTalentForm({ setShowForm }) {
-  const [text, setText] = useState("");
-  // const [category, setCategory] = useSTate("");
+  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [portfolio, setPortfolio] = useState("");
+  const [past, setPast] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(
+      name,
+      category,
+      phone,
+      email,
+      portfolio,
+      past,
+      country,
+      state,
+      city
+    );
+  }
+  // TODO --> make certain fields required
+  //TODO --> change the popup error message?
+  //TODO --> clear the fields when add is clicked
 
   return (
     <div className="mt-5" id="formBody">
       <div className="container-fluid">
-        <div>
-          <h6 className="m-2 modal-title" id="modal-title">
-            ADD A CONTRIBUTOR
-          </h6>
-        </div>
-        <div className="row justify-content-center my-5">
-          <form>
-            <div className="col-lg-12">
-              <div className="col-lg-4 mx-auto">
-                {/* <label htmlFor="category" className="form-label">
-                  Select a Category*
-                </label> */}
+        <h6 className="m-2 modal-title" id="modal-title">
+          ADD A CONTRIBUTOR
+        </h6>
+      </div>
+      <div className="row justify-content-center my-5">
+        <form onSubmit={handleSubmit}>
+          <div className="col-lg-12">
+            <div className="col-lg-4 mx-auto">
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="bi bi-tag-fill"></i>
+                </span>
+                {/* SETTING VALUE OF CATEGORY */}
+                <select
+                  className="form-select mx-auto"
+                  id="category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value="">Select a Category*</option>
+                  {CATEGORIES.map((cat) => (
+                    <option key={cat.name} value={cat.name}>
+                      {cat.name.toUpperCase()}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="row justify-content-center my-5">
+              <div className="col-lg-4">
+                <label htmlFor="name" className="form-label float-left">
+                  Name*
+                </label>
                 <div className="input-group">
                   <span className="input-group-text">
-                    <i className="bi bi-tag-fill"></i>
+                    <i className="bi bi-person-fill"></i>
                   </span>
-                  <select className="form-select mx-auto" id="category">
-                    <option value="photo" selected>
-                      Select a Category*
-                    </option>
-                    {CATEGORIES.map((cat) => (
-                      <option key={cat.name} value={cat.name}>
-                        {cat.name.toUpperCase()}
-                      </option>
-                    ))}
-                  </select>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    placeholder="Bob Bobster"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <label htmlFor="email" className="form-label">
+                  Email*
+                </label>
+                <div className="input-group">
+                  <span className="input-group-text">
+                    <i className="bi bi-envelope-fill"></i>
+                  </span>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="bob@bobster.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <label htmlFor="phone" className="form-label">
+                  Phone Number*
+                </label>
+                <div className="input-group">
+                  <span className="input-group-text">
+                    <i className="bi bi-telephone-fill"></i>
+                  </span>
+                  <input
+                    type="tel"
+                    className="form-control"
+                    id="phone"
+                    placeholder="xxx-xxx-xxxx"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="row justify-content-center my-5">
+              <div className="col-lg-6">
+                <label htmlFor="portfolio" className="form-label">
+                  Portfolio
+                </label>
+                <div className="input-group">
+                  <span className="input-group-text">
+                    <i className="bi bi-star-fill"></i>
+                  </span>
+                  <input
+                    type="url"
+                    className="form-control"
+                    id="portfolio"
+                    placeholder="http://"
+                    pattern="https?://.+"
+                    required
+                    value={portfolio}
+                    onChange={(e) => setPortfolio(e.target.value)}
+                  />
                 </div>
               </div>
 
+              <div className="col-lg-6">
+                <label htmlFor="pastWork" className="form-label">
+                  Past Work
+                </label>
+                <div className="input-group">
+                  <span className="input-group-text">
+                    <i className="bi bi-stars"></i>
+                  </span>
+                  <input
+                    type="url"
+                    className="form-control"
+                    id="pastWork"
+                    placeholder="http://"
+                    pattern="https?://.+"
+                    value={past}
+                    onChange={(e) => setPast(e.target.value)}
+                  />
+                </div>
+              </div>
               <div className="row justify-content-center my-5">
                 <div className="col-lg-4">
-                  <label htmlFor="name" className="form-label float-left">
-                    Name*
+                  <label htmlFor="country" className="form-label">
+                    Country*
                   </label>
                   <div className="input-group">
                     <span className="input-group-text">
-                      <i className="bi bi-person-fill"></i>
+                      <i className="bi bi-geo-alt-fill"></i>
                     </span>
                     <input
                       type="text"
                       className="form-control"
-                      id="name"
-                      placeholder="Bob Bobster"
-                      value={text}
-                      onChange={(e) => setText(e.target.value)}
+                      id="country"
+                      placeholder="Country"
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="col-lg-4">
-                  <label htmlFor="email" className="form-label">
-                    Email*
+                  <label htmlFor="state" className="form-label">
+                    State*
                   </label>
                   <div className="input-group">
                     <span className="input-group-text">
-                      <i className="bi bi-envelope-fill"></i>
+                      <i className="bi bi-geo-alt-fill"></i>
                     </span>
                     <input
-                      type="email"
+                      type="text"
                       className="form-control"
-                      id="email"
-                      placeholder="bob@bobster.com"
+                      id="state"
+                      placeholder="If applicable..."
+                      value={state}
+                      onChange={(e) => setState(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="col-lg-4">
-                  <label htmlFor="phone" className="form-label">
-                    Phone Number*
+                  <label htmlFor="city" className="form-label">
+                    City*
                   </label>
                   <div className="input-group">
                     <span className="input-group-text">
-                      <i className="bi bi-telephone-fill"></i>
+                      <i className="bi bi-geo-alt-fill"></i>
                     </span>
                     <input
-                      type="tel"
+                      type="text"
                       className="form-control"
-                      id="phone"
-                      placeholder="xxx-xxx-xxxx"
+                      id="city"
+                      placeholder="Austin"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
                     />
-                  </div>
-                </div>
-              </div>
-              <div className="row justify-content-center my-5">
-                <div className="col-lg-6">
-                  <label htmlFor="portfolio" className="form-label">
-                    Portfolio
-                  </label>
-                  <div className="input-group">
-                    <span className="input-group-text">
-                      <i className="bi bi-star-fill"></i>
-                    </span>
-                    <input
-                      type="url"
-                      className="form-control"
-                      id="portfolio"
-                      placeholder="http://"
-                      pattern="https?://.+"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="col-lg-6">
-                  <label htmlFor="pastWork" className="form-label">
-                    Past Work
-                  </label>
-                  <div className="input-group">
-                    <span className="input-group-text">
-                      <i className="bi bi-stars"></i>
-                    </span>
-                    <input
-                      type="url"
-                      className="form-control"
-                      id="pastWork"
-                      placeholder="http://"
-                      pattern="https?://.+"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="row justify-content-center my-5">
-                  <div className="col-lg-4">
-                    <label htmlFor="country" className="form-label">
-                      Country*
-                    </label>
-                    <div className="input-group">
-                      <span className="input-group-text">
-                        <i className="bi bi-geo-alt-fill"></i>
-                      </span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="country"
-                        value="United States"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-lg-4">
-                    <label htmlFor="state" className="form-label">
-                      State*
-                    </label>
-                    <div className="input-group">
-                      <span className="input-group-text">
-                        <i className="bi bi-geo-alt-fill"></i>
-                      </span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="state"
-                        placeholder="If applicable..."
-                      />
-                    </div>
-                  </div>
-                  <div className="col-lg-4">
-                    <label htmlFor="city" className="form-label">
-                      City*
-                    </label>
-                    <div className="input-group">
-                      <span className="input-group-text">
-                        <i className="bi bi-geo-alt-fill"></i>
-                      </span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="city"
-                        placeholder="Austin"
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </form>
-        </div>
-
-        <div className="modal-footer">
-          <button
-            type="button"
-            className="btn modalBTN btny-outline-dark"
-            onClick={() => setShowForm(false)}
-          >
-            Cancel
-          </button>
-          {/* TODO --> display a message when clicked */}
-          <button type="submit" className="btn modalBTN btn-dark ms-3">
-            Add
-          </button>
-        </div>
+          </div>
+          <div className="modal-footer">
+            <button
+              type="button"
+              className="btn modalBTN btny-outline-dark"
+              onClick={() => setShowForm(false)}
+            >
+              Cancel
+            </button>
+            {/* TODO --> display a message when clicked */}
+            <button type="submit" className="btn modalBTN btn-dark ms-3">
+              Add
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
