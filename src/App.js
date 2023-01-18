@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-// import styled from "styled-components";
 import "./style.css";
 
-// const LinkButton = styled.button`
-//   padding: 0 1rem;
-//   outline: none;
-
-// `;
+// TODO --> Add colors to array
+const CATEGORIES = [
+  { name: "photo", color: "" },
+  { name: "video", color: "" },
+  { name: "stylist", color: "" },
+  { name: "makeup", color: "" },
+  { name: "hair", color: "" },
+  { name: "assistant", color: "" },
+  { name: "other", color: "" },
+];
 
 const initialPerson = [
   {
@@ -121,7 +125,6 @@ const LocationButton = ({ location }) => (
   </button>
 );
 
-//TODO-->filters out duplicates, empty values, undefined
 function LocationNav() {
   const uniqueStates = [
     ...new Set(
@@ -175,6 +178,7 @@ function SearchBar({ setShowForm, showForm }) {
             id="add"
           />
           <span className="align-items-center fs-6 m-2 add-contributor">
+            {/* TODO --> ADD SMOOTH ANNIMATION FOR THE FORM */}
             {/* TOGGLES THE FORM */}
             {showForm ? "CLOSE FORM" : "ADD A CONTRIBUTOR"}
           </span>
@@ -205,8 +209,11 @@ function SearchBar({ setShowForm, showForm }) {
 }
 
 function AddTalentForm({ setShowForm }) {
+  const [text, setText] = useState("");
+  // const [category, setCategory] = useSTate("");
+
   return (
-    <div className="modal-body mt-5" id="formBody">
+    <div className="mt-5" id="formBody">
       <div className="container-fluid">
         <div>
           <h6 className="m-2 modal-title" id="modal-title">
@@ -217,23 +224,22 @@ function AddTalentForm({ setShowForm }) {
           <form>
             <div className="col-lg-12">
               <div className="col-lg-4 mx-auto">
-                <label htmlFor="category" className="form-label">
-                  Select a talent category*
-                </label>
-                <div className="mb-4 input-group">
+                {/* <label htmlFor="category" className="form-label">
+                  Select a Category*
+                </label> */}
+                <div className="input-group">
                   <span className="input-group-text">
                     <i className="bi bi-tag-fill"></i>
                   </span>
                   <select className="form-select mx-auto" id="category">
                     <option value="photo" selected>
-                      Photo
+                      Select a Category*
                     </option>
-                    <option value="video">Video</option>
-                    <option value="stylist">Stylist</option>
-                    <option value="makeup">Makeup</option>
-                    <option value="hair">Hair Stylist</option>
-                    <option value="assistant">Assistant</option>
-                    <option value="other">Other</option>
+                    {CATEGORIES.map((cat) => (
+                      <option key={cat.name} value={cat.name}>
+                        {cat.name.toUpperCase()}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -243,7 +249,7 @@ function AddTalentForm({ setShowForm }) {
                   <label htmlFor="name" className="form-label float-left">
                     Name*
                   </label>
-                  <div className="mb-4 input-group">
+                  <div className="input-group">
                     <span className="input-group-text">
                       <i className="bi bi-person-fill"></i>
                     </span>
@@ -252,6 +258,8 @@ function AddTalentForm({ setShowForm }) {
                       className="form-control"
                       id="name"
                       placeholder="Bob Bobster"
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
                     />
                   </div>
                 </div>
@@ -259,7 +267,7 @@ function AddTalentForm({ setShowForm }) {
                   <label htmlFor="email" className="form-label">
                     Email*
                   </label>
-                  <div className="mb-4 input-group">
+                  <div className="input-group">
                     <span className="input-group-text">
                       <i className="bi bi-envelope-fill"></i>
                     </span>
@@ -275,7 +283,7 @@ function AddTalentForm({ setShowForm }) {
                   <label htmlFor="phone" className="form-label">
                     Phone Number*
                   </label>
-                  <div className="mb-4 input-group">
+                  <div className="input-group">
                     <span className="input-group-text">
                       <i className="bi bi-telephone-fill"></i>
                     </span>
@@ -293,7 +301,7 @@ function AddTalentForm({ setShowForm }) {
                   <label htmlFor="portfolio" className="form-label">
                     Portfolio
                   </label>
-                  <div className="mb-4 input-group">
+                  <div className="input-group">
                     <span className="input-group-text">
                       <i className="bi bi-star-fill"></i>
                     </span>
@@ -312,7 +320,7 @@ function AddTalentForm({ setShowForm }) {
                   <label htmlFor="pastWork" className="form-label">
                     Past Work
                   </label>
-                  <div className="mb-4 input-group">
+                  <div className="input-group">
                     <span className="input-group-text">
                       <i className="bi bi-stars"></i>
                     </span>
@@ -331,7 +339,7 @@ function AddTalentForm({ setShowForm }) {
                     <label htmlFor="country" className="form-label">
                       Country*
                     </label>
-                    <div className="mb-4 input-group">
+                    <div className="input-group">
                       <span className="input-group-text">
                         <i className="bi bi-geo-alt-fill"></i>
                       </span>
@@ -347,7 +355,7 @@ function AddTalentForm({ setShowForm }) {
                     <label htmlFor="state" className="form-label">
                       State*
                     </label>
-                    <div className="mb-4 input-group">
+                    <div className="input-group">
                       <span className="input-group-text">
                         <i className="bi bi-geo-alt-fill"></i>
                       </span>
@@ -389,6 +397,7 @@ function AddTalentForm({ setShowForm }) {
           >
             Cancel
           </button>
+          {/* TODO --> display a message when clicked */}
           <button type="submit" className="btn modalBTN btn-dark ms-3">
             Add
           </button>
@@ -416,9 +425,10 @@ function CardContainer() {
 
 function Card({ fact }) {
   return (
+    //TODO--> Make a table that is two levels only, then us flex to start and to end.
     <>
-      <section class="innerCardContainer mt-3 px-4">
-        <table class="table table-borderless table-responsive-xxl talentList">
+      <section className="innerCardContainer mt-3 px-4">
+        <table className="table table-borderless table-responsive-xxl talentList">
           <tbody>
             <tr className="cardTop">
               <th scope="row" className="tableName pt-4 ps-4">
