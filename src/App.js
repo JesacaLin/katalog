@@ -3,19 +3,19 @@ import "./style.css";
 
 // TODO --> Add colors to array
 const CATEGORIES = [
-  { name: "photo", color: "" },
-  { name: "video", color: "" },
-  { name: "stylist", color: "" },
-  { name: "makeup", color: "" },
-  { name: "hair", color: "" },
-  { name: "assistant", color: "" },
-  { name: "other", color: "" },
+  { name: "Photo", color: "" },
+  { name: "Video", color: "" },
+  { name: "Stylist", color: "" },
+  { name: "Makeup", color: "" },
+  { name: "Hair", color: "" },
+  { name: "Assistant", color: "" },
+  { name: "Other", color: "" },
 ];
 
 const initialPerson = [
   {
     id: 1,
-    category: "Photographer",
+    category: "Photo",
     name: "Emmy Park",
     email: "Emmy@emmypark.com",
     phone: "111-222-3333",
@@ -46,6 +46,7 @@ const initialPerson = [
 function App() {
   //1. DEFINE STATE VARIABLE
   const [showForm, setShowForm] = useState(false);
+  const [talent, setTalent] = useState(initialPerson);
 
   return (
     <>
@@ -58,9 +59,13 @@ function App() {
           <div className="col-lg-1 gap"></div>
           <section className="addSearchModalCards col-lg-8 mt-3">
             <aside className="row mt-5">
-              <SearchBar setShowForm={setShowForm} showForm={showForm} />
+              <SearchBar
+                setShowForm={setShowForm}
+                showForm={showForm}
+                setTalent={setTalent}
+              />
             </aside>
-            <CardContainer />
+            <CardContainer talent={talent} />
           </section>
         </div>
       </main>
@@ -159,7 +164,7 @@ function LocationNav() {
   );
 }
 
-function SearchBar({ setShowForm, showForm }) {
+function SearchBar({ setShowForm, showForm, setTalent }) {
   return (
     <aside className="row mt-5">
       <div className="addAndSearch d-flex flex-row justify-content-end">
@@ -203,39 +208,66 @@ function SearchBar({ setShowForm, showForm }) {
         </form>
       </div>
       {/* LOOK 2. USE STATE VARIABLE - TURN THE FORM ON AND OFF */}
-      {showForm ? <AddTalentForm setShowForm={setShowForm} /> : null}
+      {showForm ? (
+        <AddTalentForm setTalent={setTalent} setShowForm={setShowForm} />
+      ) : null}
     </aside>
   );
 }
 
-function AddTalentForm({ setShowForm }) {
+function AddTalentForm({ setShowForm, setTalent }) {
+  // FORM STATES
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [portfolio, setPortfolio] = useState("");
+  const [portfolio, setPortfolio] = useState("http://");
   const [past, setPast] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
 
   function handleSubmit(e) {
+    // can set up a text comment to be placed next to the ADD button to say "person added, can close the form?". then clear the form?
+    //1. prevent the browser reload
     e.preventDefault();
-    console.log(
-      name,
-      category,
-      phone,
-      email,
-      portfolio,
-      past,
-      country,
-      state,
-      city
-    );
+    console.log("handleSubmit fired");
+    //2. validate data. if yes, create new fact.
+    if (category) {
+      const newTalent =
+        //3. create a new fact object
+        {
+          id: Math.round(Math.random() * 10000000),
+          category,
+          name,
+          email,
+          phone,
+          portfolio,
+          past,
+          country,
+          state,
+          city,
+          upVote: 0,
+          downVote: 0,
+        };
+      //4. add new fact to the UI: add the fact to state.
+      setTalent((talent) => [newTalent, ...talent]);
+      //5. reset the input fields
+      setCategory("");
+      setName("");
+      setPhone("");
+      setEmail("");
+      setPortfolio("http://");
+      setPast("");
+      setCountry("");
+      setState("");
+      setCity("");
+      //6. close the form
+      setShowForm(false);
+    }
   }
   // TODO --> make certain fields required
-  //TODO --> change the popup error message?
-  //TODO --> clear the fields when add is clicked
+  //TODO --> edit the cards or just delete it?
 
   return (
     <div className="mt-5" id="formBody">
@@ -245,6 +277,7 @@ function AddTalentForm({ setShowForm }) {
         </h6>
       </div>
       <div className="row justify-content-center my-5">
+        {/* LOOK */}
         <form onSubmit={handleSubmit}>
           <div className="col-lg-12">
             <div className="col-lg-4 mx-auto">
@@ -256,6 +289,7 @@ function AddTalentForm({ setShowForm }) {
                 <select
                   className="form-select mx-auto"
                   id="category"
+                  required
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
@@ -282,6 +316,7 @@ function AddTalentForm({ setShowForm }) {
                     type="text"
                     className="form-control"
                     id="name"
+                    required
                     placeholder="Bob Bobster"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -300,6 +335,7 @@ function AddTalentForm({ setShowForm }) {
                     type="email"
                     className="form-control"
                     id="email"
+                    required
                     placeholder="bob@bobster.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -338,9 +374,9 @@ function AddTalentForm({ setShowForm }) {
                     type="url"
                     className="form-control"
                     id="portfolio"
-                    placeholder="http://"
-                    pattern="https?://.+"
-                    required
+                    // placeholder="http://"
+                    // pattern="https?://.+"
+                    // required
                     value={portfolio}
                     onChange={(e) => setPortfolio(e.target.value)}
                   />
@@ -359,8 +395,8 @@ function AddTalentForm({ setShowForm }) {
                     type="url"
                     className="form-control"
                     id="pastWork"
-                    placeholder="http://"
-                    pattern="https?://.+"
+                    // placeholder="http://"
+                    // pattern="https?://.+"
                     value={past}
                     onChange={(e) => setPast(e.target.value)}
                   />
@@ -425,6 +461,7 @@ function AddTalentForm({ setShowForm }) {
             </div>
           </div>
           <div className="modal-footer">
+            {/* LOOK */}
             <button
               type="button"
               className="btn modalBTN btny-outline-dark"
@@ -433,8 +470,8 @@ function AddTalentForm({ setShowForm }) {
               Cancel
             </button>
             {/* TODO --> display a message when clicked */}
-            <button type="submit" className="btn modalBTN btn-dark ms-3">
-              Add
+            <button type="submit" className="btn modalBTN btn-dark">
+              Submit
             </button>
           </div>
         </form>
@@ -443,9 +480,7 @@ function AddTalentForm({ setShowForm }) {
   );
 }
 
-function CardContainer() {
-  const talent = initialPerson;
-
+function CardContainer({ talent }) {
   return (
     <section className="cardContainer mt-5 px-4">
       <table className="table table-borderless table-responsive-xxl talentList">
