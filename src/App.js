@@ -47,6 +47,7 @@ function App() {
   //1. DEFINE STATE VARIABLE
   const [showForm, setShowForm] = useState(false);
   const [talent, setTalent] = useState(initialPerson);
+  const [country, setCountry] = useState("");
 
   return (
     <>
@@ -54,7 +55,7 @@ function App() {
       <main className="main container-fluid px-4 text-center">
         <div className="row mt-5">
           <aside className="sidenav col-lg-3 mt-5">
-            <LocationNav />
+            <LocationNav setCountry={setCountry} country={country} />
           </aside>
           <div className="col-lg-1 gap"></div>
           <section className="addSearchModalCards col-lg-8 mt-3">
@@ -63,6 +64,8 @@ function App() {
                 setShowForm={setShowForm}
                 showForm={showForm}
                 setTalent={setTalent}
+                setCountry={setCountry}
+                country={country}
               />
             </aside>
             <CardContainer talent={talent} />
@@ -123,14 +126,10 @@ function Header() {
     </nav>
   );
 }
-
-const LocationButton = ({ location }) => (
-  <button className="button mt-4" id="states">
-    {location}
-  </button>
-);
-
-function LocationNav() {
+// import the location state
+//based on the location state, it renders to the locationNav?
+function LocationNav({ country, setCountry }) {
+  console.log(country, setCountry);
   const uniqueStates = [
     ...new Set(
       initialPerson
@@ -150,6 +149,7 @@ function LocationNav() {
         .map((person) => person.country)
     ),
   ];
+
   return (
     <ul className="container-for-buttons mt-5">
       <h6 className="location">UNITED STATES</h6>
@@ -164,7 +164,13 @@ function LocationNav() {
   );
 }
 
-function SearchBar({ setShowForm, showForm, setTalent }) {
+const LocationButton = ({ location }) => (
+  <button className="button mt-4" id="states">
+    {location}
+  </button>
+);
+
+function SearchBar({ setShowForm, showForm, setTalent, country, setCountry }) {
   return (
     <aside className="row mt-5">
       <div className="addAndSearch d-flex flex-row justify-content-end">
@@ -209,13 +215,18 @@ function SearchBar({ setShowForm, showForm, setTalent }) {
       </div>
       {/* LOOK 2. USE STATE VARIABLE - TURN THE FORM ON AND OFF */}
       {showForm ? (
-        <AddTalentForm setTalent={setTalent} setShowForm={setShowForm} />
+        <AddTalentForm
+          setTalent={setTalent}
+          setShowForm={setShowForm}
+          country={country}
+          setCountry={setCountry}
+        />
       ) : null}
     </aside>
   );
 }
 
-function AddTalentForm({ setShowForm, setTalent }) {
+function AddTalentForm({ setShowForm, setTalent, country, setCountry }) {
   // FORM STATES
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
@@ -223,15 +234,14 @@ function AddTalentForm({ setShowForm, setTalent }) {
   const [email, setEmail] = useState("");
   const [portfolio, setPortfolio] = useState("http://");
   const [past, setPast] = useState("");
-  const [country, setCountry] = useState("");
+  // const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
 
   function handleSubmit(e) {
-    // can set up a text comment to be placed next to the ADD button to say "person added, can close the form?". then clear the form?
     //1. prevent the browser reload
     e.preventDefault();
-    console.log("handleSubmit fired");
+    // console.log(country, setCountry);
     //2. validate data. if yes, create new fact.
     if (category) {
       const newTalent =
@@ -296,7 +306,7 @@ function AddTalentForm({ setShowForm, setTalent }) {
                   <option value="">Select a Category*</option>
                   {CATEGORIES.map((cat) => (
                     <option key={cat.name} value={cat.name}>
-                      {cat.name.toUpperCase()}
+                      {cat.name}
                     </option>
                   ))}
                 </select>
