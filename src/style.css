@@ -46,9 +46,11 @@ html {
 .logoName,
 .fs-5,
 .add-contributor,
+.cHeader,
 #modal-title,
 #login,
-#sign-up {
+#sign-up,
+#about {
   font-weight: 700;
 }
 
@@ -114,6 +116,10 @@ a {
 
 #modal-title {
   text-align: center;
+}
+
+.cHeader {
+  text-align: left;
 }
 
 .input-group {

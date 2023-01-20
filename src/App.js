@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import supabase from "./supabase";
+// import { API_KEY, BEARER_TOKEN } from "./config";
 
 // TODO --> Add colors to array
 const CATEGORIES = [
@@ -46,8 +48,21 @@ const initialPerson = [
 function App() {
   //1. DEFINE STATE VARIABLE
   const [showForm, setShowForm] = useState(false);
-  const [talent, setTalent] = useState(initialPerson);
+  //when the app first lauches, it using empty array to make the list empty.
+  const [talent, setTalent] = useState([]);
   const [country, setCountry] = useState("");
+
+  //when app first loads, it will display all the talent from the database.
+  useEffect(function () {
+    async function getTalent() {
+      // calling on the supabase client with await
+      const { data: Contributor, error } = await supabase
+        .from("Contributor")
+        .select("*");
+      setTalent(Contributor);
+    }
+    getTalent();
+  }, []);
 
   return (
     <>
@@ -99,6 +114,12 @@ function Header() {
           >
             SIGN UP
           </button>
+          <button
+            className="button d-flex align-items-center fs-6 px-2"
+            id="about"
+          >
+            ABOUT
+          </button>
           <button className="button d-flex align-items-center px-2">
             <img
               src="./assets/toggle.svg"
@@ -129,7 +150,7 @@ function Header() {
 // import the location state
 //based on the location state, it renders to the locationNav?
 function LocationNav({ country, setCountry }) {
-  console.log(country, setCountry);
+  // console.log(country, setCountry);
   const uniqueStates = [
     ...new Set(
       initialPerson
@@ -493,6 +514,7 @@ function AddTalentForm({ setShowForm, setTalent, country, setCountry }) {
 function CardContainer({ talent }) {
   return (
     <section className="cardContainer mt-5 px-4">
+      <h6 className="cHeader">CONTRIBUTORS</h6>
       <table className="table table-borderless table-responsive-xxl talentList">
         {talent.map((fact) => (
           <tbody className="mb-5" key={fact.id}>
