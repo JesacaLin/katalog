@@ -50,16 +50,25 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   //when the app first lauches, it using empty array to make the list empty.
   const [talent, setTalent] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [country, setCountry] = useState("");
 
   //when app first loads, it will display all the talent from the database.
   useEffect(function () {
     async function getTalent() {
+      setIsLoading(true);
       // calling on the supabase client with await
       const { data: Contributor, error } = await supabase
         .from("Contributor")
-        .select("*");
-      setTalent(Contributor);
+        .select("*")
+        //THIS IS WHERE YOU CAN SORT THE CARDS. should sort the states/countries using this.
+        .order("category", { ascending: true })
+        .order("upVote", { ascending: false });
+
+      //error handling
+      if (!error) setTalent(Contributor);
+      else alert("There was a problem loading data");
+      setIsLoading(false);
     }
     getTalent();
   }, []);
@@ -83,11 +92,21 @@ function App() {
                 country={country}
               />
             </aside>
-            <CardContainer talent={talent} />
+            {isLoading ? <Loader /> : <CardContainer talent={talent} />}
           </section>
         </div>
       </main>
     </>
+  );
+}
+
+function Loader() {
+  return (
+    <div class="d-flex align-items-center justify-content-center">
+      {/* // <div class="spinner-border" role="status"> */}
+      <span class="sr-only mt-5 loading">Loading...</span>
+    </div>
+    // </div>
   );
 }
 
@@ -514,7 +533,12 @@ function AddTalentForm({ setShowForm, setTalent, country, setCountry }) {
 function CardContainer({ talent }) {
   return (
     <section className="cardContainer mt-5 px-4">
-      <h6 className="cHeader">CONTRIBUTORS</h6>
+      {/* <span className=""> */}
+      <h6 className="cHeader">
+        CONTRIBUTORS<i class="bi bi-caret-down-fill ps-2"></i>
+      </h6>
+
+      {/* </span> */}
       <table className="table table-borderless table-responsive-xxl talentList">
         {talent.map((fact) => (
           <tbody className="mb-5" key={fact.id}>
