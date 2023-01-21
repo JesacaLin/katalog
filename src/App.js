@@ -52,25 +52,58 @@ function App() {
   const [talent, setTalent] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
 
   //when app first loads, it will display all the talent from the database.
   useEffect(function () {
+    // ASYNC function to display cards
     async function getTalent() {
-      setIsLoading(true);
-      // calling on the supabase client with await
-      const { data: Contributor, error } = await supabase
-        .from("Contributor")
-        .select("*")
-        //THIS IS WHERE YOU CAN SORT THE CARDS. should sort the states/countries using this.
-        .order("category", { ascending: true })
-        .order("upVote", { ascending: false });
-
-      //error handling
-      if (!error) setTalent(Contributor);
-      else alert("There was a problem loading data");
+      try {
+        setIsLoading(true);
+        // calling on the supabase client with await
+        const { data: Contributor } = await supabase
+          .from("Contributor")
+          .select("*")
+          //THIS IS WHERE YOU CAN SORT THE CARDS. should sort the states/countries using this.
+          .order("category", { ascending: true })
+          .order("upVote", { ascending: false });
+        setTalent(Contributor);
+      } catch (error) {
+        console.error(error);
+        alert("There was a problem loading data");
+      }
       setIsLoading(false);
     }
     getTalent();
+
+    //ASYNC function to display states
+    async function getCountry() {
+      try {
+        const { data: Contributor } = await supabase
+          .from("Contributor")
+          .select("country")
+          .order("country", { ascending: true });
+        setCountry(Contributor.map((item) => item.country));
+      } catch (error) {
+        console.error(error);
+        alert("There was a problem loading the countries");
+      }
+    }
+    getCountry();
+
+    async function getState() {
+      try {
+        const { data: Contributor } = await supabase
+          .from("Contributor")
+          .select("state")
+          .order("state", { ascending: true });
+        setState(Contributor.map((item) => item.state));
+      } catch (error) {
+        console.error(error);
+        alert("There was a problem loading the countries");
+      }
+    }
+    getState();
   }, []);
 
   return (
@@ -79,7 +112,12 @@ function App() {
       <main className="main container-fluid px-4 text-center">
         <div className="row mt-5">
           <aside className="sidenav col-lg-3 mt-5">
-            <LocationNav setCountry={setCountry} country={country} />
+            <LocationNav
+              setCountry={setCountry}
+              country={country}
+              setState={setState}
+              state={state}
+            />
           </aside>
           <div className="col-lg-1 gap"></div>
           <section className="addSearchModalCards col-lg-8 mt-3">
@@ -166,39 +204,24 @@ function Header() {
     </nav>
   );
 }
-// import the location state
-//based on the location state, it renders to the locationNav?
-function LocationNav({ country, setCountry }) {
-  // console.log(country, setCountry);
-  const uniqueStates = [
-    ...new Set(
-      initialPerson
-        .filter((person) => person.state && person.state.length > 0)
-        .map((person) => person.state)
-    ),
-  ];
-  const uniqueCountries = [
-    ...new Set(
-      initialPerson
-        .filter(
-          (person) =>
-            person.country &&
-            person.country.length > 0 &&
-            person.country.toLowerCase() !== "united states"
-        )
-        .map((person) => person.country)
-    ),
-  ];
+function LocationNav({ country, state }) {
+  //The returned data from DB are objects. filter/map are array methods. Need to extract the data from the object by using Object.values().
+  const uniqueStates = [...new Set(state)].filter(Boolean);
+  const uniqueCountries = [...new Set(country)].filter(
+    (c) => c.toLowerCase() !== "united states"
+  );
+  console.log(uniqueStates);
+  console.log(uniqueCountries);
 
   return (
     <ul className="container-for-buttons mt-5">
       <h6 className="location">UNITED STATES</h6>
-      {uniqueStates.map((state, index) => (
-        <LocationButton key={index} location={state} />
+      {uniqueStates.map((s, index) => (
+        <LocationButton key={index} location={s} />
       ))}
       <h6 className="location mt-5">INTERNATIONAL</h6>
-      {uniqueCountries.map((country, index) => (
-        <LocationButton key={index} location={country} />
+      {uniqueCountries.map((c, index) => (
+        <LocationButton key={index} location={c} />
       ))}
     </ul>
   );
@@ -210,7 +233,7 @@ const LocationButton = ({ location }) => (
   </button>
 );
 
-function SearchBar({ setShowForm, showForm, setTalent, country, setCountry }) {
+function SearchBar({ setShowForm, showForm, setTalent, setCountry, setState }) {
   return (
     <aside className="row mt-5">
       <div className="addAndSearch d-flex flex-row justify-content-end">
@@ -258,15 +281,15 @@ function SearchBar({ setShowForm, showForm, setTalent, country, setCountry }) {
         <AddTalentForm
           setTalent={setTalent}
           setShowForm={setShowForm}
-          country={country}
           setCountry={setCountry}
+          setState={setState}
         />
       ) : null}
     </aside>
   );
 }
 
-function AddTalentForm({ setShowForm, setTalent, country, setCountry }) {
+function AddTalentForm({ setShowForm, setTalent }) {
   // FORM STATES
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
@@ -274,34 +297,31 @@ function AddTalentForm({ setShowForm, setTalent, country, setCountry }) {
   const [email, setEmail] = useState("");
   const [portfolio, setPortfolio] = useState("http://");
   const [past, setPast] = useState("");
-  // const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
+  const [formCountry, setFormCountry] = useState("");
+  const [formState, setFormState] = useState("");
   const [city, setCity] = useState("");
 
   function handleSubmit(e) {
-    //1. prevent the browser reload
     e.preventDefault();
-    // console.log(country, setCountry);
     //2. validate data. if yes, create new fact.
-    if (category) {
-      const newTalent =
-        //3. create a new fact object
-        {
-          id: Math.round(Math.random() * 10000000),
-          category,
-          name,
-          email,
-          phone,
-          portfolio,
-          past,
-          country,
-          state,
-          city,
-          upVote: 0,
-          downVote: 0,
-        };
+    if (category && name && email) {
+      const newTalent = {
+        id: Math.round(Math.random() * 10000000),
+        category,
+        name,
+        email,
+        phone,
+        portfolio,
+        past,
+        country: formCountry,
+        state: formState,
+        city,
+        upVote: 0,
+        downVote: 0,
+      };
       //4. add new fact to the UI: add the fact to state.
       setTalent((talent) => [newTalent, ...talent]);
+
       //5. reset the input fields
       setCategory("");
       setName("");
@@ -309,15 +329,13 @@ function AddTalentForm({ setShowForm, setTalent, country, setCountry }) {
       setEmail("");
       setPortfolio("http://");
       setPast("");
-      setCountry("");
-      setState("");
+      setFormCountry("");
+      setFormState("");
       setCity("");
       //6. close the form
       setShowForm(false);
     }
   }
-  // TODO --> make certain fields required
-  //TODO --> edit the cards or just delete it?
 
   return (
     <div className="mt-5" id="formBody">
@@ -466,8 +484,8 @@ function AddTalentForm({ setShowForm, setTalent, country, setCountry }) {
                       className="form-control"
                       id="country"
                       placeholder="Country"
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
+                      value={formCountry}
+                      onChange={(e) => setFormCountry(e.target.value)}
                     />
                   </div>
                 </div>
@@ -484,8 +502,8 @@ function AddTalentForm({ setShowForm, setTalent, country, setCountry }) {
                       className="form-control"
                       id="state"
                       placeholder="If applicable..."
-                      value={state}
-                      onChange={(e) => setState(e.target.value)}
+                      value={formState}
+                      onChange={(e) => setFormState(e.target.value)}
                     />
                   </div>
                 </div>
@@ -535,7 +553,7 @@ function CardContainer({ talent }) {
     <section className="cardContainer mt-5 px-4">
       {/* <span className=""> */}
       <h6 className="cHeader">
-        CONTRIBUTORS<i class="bi bi-caret-down-fill ps-2"></i>
+        CONTRIBUTORS<i className="bi bi-caret-down-fill ps-2"></i>
       </h6>
 
       {/* </span> */}
