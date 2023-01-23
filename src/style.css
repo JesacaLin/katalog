@@ -36,6 +36,7 @@ html {
 #states,
 #searchBar,
 #formBody,
+#all,
 .innerCardContainer {
   border-radius: 25px;
 }
@@ -97,7 +98,8 @@ a {
   padding: 2.5rem;
 }
 
-#states {
+#states,
+#all {
   background-color: #f1f1f1;
   padding: 0.5rem;
   width: 100%;

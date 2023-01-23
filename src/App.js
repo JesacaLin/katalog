@@ -14,71 +14,75 @@ const CATEGORIES = [
   { name: "Other", color: "" },
 ];
 
-const initialPerson = [
-  {
-    id: 1,
-    category: "Photo",
-    name: "Emmy Park",
-    email: "Emmy@emmypark.com",
-    phone: "111-222-3333",
-    portfolio: "http://www.google.com",
-    pastWork: "http://www.google.com",
-    country: "United States",
-    state: "New York",
-    city: "New York",
-    upVote: 1,
-    downVote: 0,
-  },
-  {
-    id: 2,
-    category: "Video",
-    name: "Person Two",
-    email: "Person@emmypark.com",
-    phone: "111-444-3333",
-    portfolio: "http://www.google.com",
-    pastWork: "http://www.google.com",
-    country: "England",
-    state: "",
-    city: "London",
-    upVote: 10,
-    downVote: 0,
-  },
-];
-
 function App() {
   //1. DEFINE STATE VARIABLE
   const [showForm, setShowForm] = useState(false);
-  //when the app first lauches, it using empty array to make the list empty.
   const [talent, setTalent] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
+  const [stateFilter, setStateFilter] = useState("all");
+  const [countryFilter, setCountryFilter] = useState("all");
+  const [filteredTalent, setFilteredTalent] = useState([]);
 
-  //when app first loads, it will display all the talent from the database.
-  useEffect(function () {
-    // ASYNC function to display cards
-    async function getTalent() {
-      try {
-        setIsLoading(true);
-        // calling on the supabase client with await
-        const { data: Contributor } = await supabase
-          .from("Contributor")
-          .select("*")
-          //THIS IS WHERE YOU CAN SORT THE CARDS. should sort the states/countries using this.
-          .order("category", { ascending: true })
-          .order("upVote", { ascending: false });
-        setTalent(Contributor);
-      } catch (error) {
-        console.error(error);
-        alert("There was a problem loading data");
-      }
-      setIsLoading(false);
+  function handleFilterChange(newFilter, filterType) {
+    if (filterType === "state") {
+      setCountryFilter("all");
+      setStateFilter(newFilter);
+    } else if (filterType === "country") {
+      setStateFilter("all");
+      setCountryFilter(newFilter);
     }
-    getTalent();
+  }
 
-    //ASYNC function to display states
+  useEffect(
+    function () {
+      // ASYNC function to display cards
+      async function getTalent() {
+        try {
+          setIsLoading(true);
+          let query = supabase.from("Contributor").select("*");
+
+          if (stateFilter !== "all" && countryFilter !== "all") {
+            query.and((qb) => {
+              qb.eq("state", stateFilter);
+              qb.or((qb) => {
+                qb.eq("country", countryFilter);
+              });
+            });
+          }
+
+          // execute the query
+          const { data } = await query;
+          setTalent(data);
+          setFilteredTalent(
+            data.filter((fact) => {
+              if (stateFilter !== "all" && fact.state !== stateFilter) {
+                return false;
+              }
+              if (countryFilter !== "all" && fact.country !== countryFilter) {
+                return false;
+              }
+              return true;
+            })
+          );
+        } catch (error) {
+          console.error(error);
+          alert("There was a problem loading data");
+        }
+        setIsLoading(false);
+      }
+
+      getTalent();
+      //when the app first lauches, it using empty array to make the list empty.
+    },
+    [stateFilter, countryFilter]
+  );
+
+  useEffect(function () {
     async function getCountry() {
       try {
+        setIsLoading(true);
         const { data: Contributor } = await supabase
           .from("Contributor")
           .select("country")
@@ -88,11 +92,15 @@ function App() {
         console.error(error);
         alert("There was a problem loading the countries");
       }
+      setIsLoading(false);
     }
     getCountry();
+  }, []);
 
+  useEffect(function () {
     async function getState() {
       try {
+        setIsLoading(true);
         const { data: Contributor } = await supabase
           .from("Contributor")
           .select("state")
@@ -100,8 +108,9 @@ function App() {
         setState(Contributor.map((item) => item.state));
       } catch (error) {
         console.error(error);
-        alert("There was a problem loading the countries");
+        alert("There was a problem loading the states");
       }
+      setIsLoading(false);
     }
     getState();
   }, []);
@@ -117,6 +126,9 @@ function App() {
               country={country}
               setState={setState}
               state={state}
+              setStateFilter={handleFilterChange}
+              setCountryFilter={handleFilterChange}
+              handleFilterChange={handleFilterChange}
             />
           </aside>
           <div className="col-lg-1 gap"></div>
@@ -130,7 +142,7 @@ function App() {
                 country={country}
               />
             </aside>
-            {isLoading ? <Loader /> : <CardContainer talent={talent} />}
+            <CardContainer talent={filteredTalent} />
           </section>
         </div>
       </main>
@@ -140,9 +152,9 @@ function App() {
 
 function Loader() {
   return (
-    <div class="d-flex align-items-center justify-content-center">
+    <div className="d-flex align-items-center justify-content-center">
       {/* // <div class="spinner-border" role="status"> */}
-      <span class="sr-only mt-5 loading">Loading...</span>
+      <span className="sr-only mt-5 loading">Loading...</span>
     </div>
     // </div>
   );
@@ -204,31 +216,68 @@ function Header() {
     </nav>
   );
 }
-function LocationNav({ country, state }) {
+function LocationNav({
+  country,
+  state,
+  setStateFilter,
+  setCountryFilter,
+  handleFilterChange,
+}) {
   //The returned data from DB are objects. filter/map are array methods. Need to extract the data from the object by using Object.values().
-  const uniqueStates = [...new Set(state)].filter(Boolean);
+  const uniqueStates = [...new Set(state)].filter((s) => s && s !== null);
   const uniqueCountries = [...new Set(country)].filter(
-    (c) => c.toLowerCase() !== "united states"
+    (c) => c && c !== null && c.toLowerCase() !== "united states"
   );
-  console.log(uniqueStates);
-  console.log(uniqueCountries);
-
+  // console.log(uniqueStates);
   return (
     <ul className="container-for-buttons mt-5">
-      <h6 className="location">UNITED STATES</h6>
+      <button
+        className="btn button mt-4"
+        id="all"
+        onClick={() => handleFilterChange("all", "state")}
+      >
+        All
+      </button>
+      <h6 className="location mt-5">
+        UNITED STATES<i className="bi bi-caret-down-fill ps-2"></i>
+      </h6>
       {uniqueStates.map((s, index) => (
-        <LocationButton key={index} location={s} />
+        <LocationButton
+          key={index}
+          location={s}
+          type="state"
+          handleFilterChange={handleFilterChange}
+        />
       ))}
-      <h6 className="location mt-5">INTERNATIONAL</h6>
+      <h6 className="location mt-5">
+        INTERNATIONAL<i className="bi bi-caret-down-fill ps-2"></i>
+      </h6>
       {uniqueCountries.map((c, index) => (
-        <LocationButton key={index} location={c} />
+        <LocationButton
+          key={index}
+          location={c}
+          type="country"
+          handleFilterChange={handleFilterChange}
+        />
       ))}
     </ul>
   );
 }
 
-const LocationButton = ({ location }) => (
-  <button className="button mt-4" id="states">
+const LocationButton = ({
+  location,
+  type,
+  setStateFilter,
+  setCountryFilter,
+  handleFilterChange,
+}) => (
+  <button
+    className="button mt-4"
+    id="states"
+    onClick={() => {
+      handleFilterChange(location, type);
+    }}
+  >
     {location}
   </button>
 );
@@ -549,20 +598,24 @@ function AddTalentForm({ setShowForm, setTalent }) {
 }
 
 function CardContainer({ talent }) {
+  // console.log(talent);
   return (
     <section className="cardContainer mt-5 px-4">
-      {/* <span className=""> */}
       <h6 className="cHeader">
         CONTRIBUTORS<i className="bi bi-caret-down-fill ps-2"></i>
       </h6>
-
-      {/* </span> */}
       <table className="table table-borderless table-responsive-xxl talentList">
-        {talent.map((fact) => (
-          <tbody className="mb-5" key={fact.id}>
-            <Card fact={fact} />
-          </tbody>
-        ))}
+        {talent.length > 0 ? (
+          talent.map((fact) => (
+            <tbody className="mb-5" key={fact.id}>
+              <Card fact={fact} />
+            </tbody>
+          ))
+        ) : (
+          <tr>
+            <td>Select a location or search for a contributor</td>
+          </tr>
+        )}
       </table>
     </section>
   );
