@@ -41,7 +41,8 @@ function App() {
       async function getTalent() {
         try {
           setIsLoading(true);
-          let query = supabase.from("Contributor").select("*");
+          // Placed a limit of 25 entries on the page
+          let query = supabase.from("Contributor").select("*").limit(25);
 
           if (stateFilter !== "all" && countryFilter !== "all") {
             query.and((qb) => {
@@ -264,13 +265,7 @@ function LocationNav({
   );
 }
 
-const LocationButton = ({
-  location,
-  type,
-  setStateFilter,
-  setCountryFilter,
-  handleFilterChange,
-}) => (
+const LocationButton = ({ location, type, handleFilterChange }) => (
   <button
     className="button mt-4"
     id="states"
@@ -434,7 +429,7 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     className="form-control"
                     id="name"
                     required
-                    placeholder="Bob Bobster"
+                    placeholder="First and Last Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
