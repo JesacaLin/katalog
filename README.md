@@ -4,9 +4,13 @@ It offers an intuitive way for creative teams to find and organize top talent wi
 
 <div align="left">  
   
-#### Built with: React | JavaScript | HTML 5 | CSS 3 | Bootstrap 5 | Supabase | Figma 
-
+##### Built with: React | JavaScript | HTML 5 | CSS 3 | Bootstrap 5 | Supabase | Figma 
+<br>
 </div> 
+
+### UI Preview
+
+<img src="https://github.com/JesacaLin/katalog/blob/main/public/assets/katalog-ui-preview.jpg?raw=true" style="width: 850px;">
 
 <br>
 
