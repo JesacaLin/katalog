@@ -104,17 +104,14 @@ a {
   padding: 0.5rem;
   width: 100%;
   font-weight: 500;
+  box-shadow: 3px 3px 5px #dcb7c0;
 }
 
 /* CONTRIBUTOR - MODAL - SEARCH */
 #formBody {
-  /* outline: 2px solid #222222; */
   background-color: #f1f1f1;
-  /* box-shadow: 3px 3px 5px #7a7a7a; */
   padding: 2.5rem;
-
   text-align: left;
-  /* width: 917.33px; */
 }
 
 #modal-title {
@@ -155,12 +152,12 @@ input::placeholder {
 
 .cardContainer {
   outline: 2px solid #222222;
-  /* min-height: 745px; */
   padding: 2.5rem;
 }
 
 .innerCardContainer {
   background-color: #f1f1f1;
+  box-shadow: 3px 3px 5px #dcb7c0;
 }
 
 #searchIcon {
@@ -169,14 +166,8 @@ input::placeholder {
 }
 
 .table {
-  /* background-color: #f1f1f1; */
   text-align: center;
-  /* border-collapse: collapse; */
 }
-
-/* .card-margin {
-  margin-bottom: 6rem !important;
-} */
 
 #upVote,
 #downVote {
@@ -186,12 +177,10 @@ input::placeholder {
   background-color: white;
   border-radius: 25px;
   box-shadow: 3px 3px 5px #ecebeb;
-  /* padding: 0.5rem 1rem; */
 }
 
 #portfolioBTN,
 #pastWorkBTN {
-  /* padding: 0 1rem; */
   width: 100%;
   background-color: white;
   border-radius: 25px;

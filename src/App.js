@@ -75,7 +75,6 @@ function App() {
       }
 
       getTalent();
-      //when the app first lauches, it using empty array to make the list empty.
     },
     [stateFilter, countryFilter]
   );
@@ -217,19 +216,13 @@ function Header() {
     </nav>
   );
 }
-function LocationNav({
-  country,
-  state,
-  setStateFilter,
-  setCountryFilter,
-  handleFilterChange,
-}) {
+function LocationNav({ country, state, handleFilterChange }) {
   //The returned data from DB are objects. filter/map are array methods. Need to extract the data from the object by using Object.values().
   const uniqueStates = [...new Set(state)].filter((s) => s && s !== null);
   const uniqueCountries = [...new Set(country)].filter(
     (c) => c && c !== null && c.toLowerCase() !== "united states"
   );
-  // console.log(uniqueStates);
+
   return (
     <ul className="container-for-buttons mt-5">
       <button
