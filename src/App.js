@@ -217,7 +217,6 @@ function Header() {
   );
 }
 function LocationNav({ country, state, handleFilterChange }) {
-  //The returned data from DB are objects. filter/map are array methods. Need to extract the data from the object by using Object.values().
   const uniqueStates = [...new Set(state)].filter((s) => s && s !== null);
   const uniqueCountries = [...new Set(country)].filter(
     (c) => c && c !== null && c.toLowerCase() !== "united states"
@@ -225,6 +224,9 @@ function LocationNav({ country, state, handleFilterChange }) {
 
   return (
     <ul className="container-for-buttons mt-5">
+      <h6 className="location">
+        LOCATIONS<i className="bi bi-caret-down-fill ps-2"></i>
+      </h6>
       <button
         className="btn button mt-4"
         id="all"

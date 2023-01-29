@@ -118,6 +118,10 @@ a {
   text-align: center;
 }
 
+#searchBar {
+  box-shadow: 3px 3px 5px #dcb7c0;
+}
+
 .cHeader {
   text-align: left;
 }
