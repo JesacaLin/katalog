@@ -335,29 +335,39 @@ function AddTalentForm({ setShowForm, setTalent }) {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [portfolio, setPortfolio] = useState("http://");
-  const [past, setPast] = useState("");
+  const [pastWork, setPastWork] = useState("");
   const [formCountry, setFormCountry] = useState("");
   const [formState, setFormState] = useState("");
   const [city, setCity] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     //2. validate data. if yes, create new fact.
     if (category && name && email) {
-      const newTalent = {
-        id: Math.round(Math.random() * 10000000),
-        category,
-        name,
-        email,
-        phone,
-        portfolio,
-        past,
-        country: formCountry,
-        state: formState,
-        city,
-        upVote: 0,
-        downVote: 0,
-      };
+      //3. upload fact to supabase and receive the new fact object.
+      const { data: newTalent, error } = await supabase
+        .from("Contributor")
+        .insert([
+          {
+            category,
+            name,
+            email,
+            phone,
+            portfolio,
+            pastWork,
+            country: formCountry,
+            state: formState,
+            city,
+          },
+        ])
+        .select();
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      console.log(newTalent);
       //4. add new fact to the UI: add the fact to state.
       setTalent((talent) => [newTalent, ...talent]);
 
@@ -367,7 +377,7 @@ function AddTalentForm({ setShowForm, setTalent }) {
       setPhone("");
       setEmail("");
       setPortfolio("http://");
-      setPast("");
+      setPastWork("");
       setFormCountry("");
       setFormState("");
       setCity("");
@@ -502,10 +512,10 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     type="url"
                     className="form-control"
                     id="pastWork"
-                    // placeholder="http://"
-                    // pattern="https?://.+"
-                    value={past}
-                    onChange={(e) => setPast(e.target.value)}
+                    placeholder="http://"
+                    pattern="https?://.+"
+                    value={pastWork}
+                    onChange={(e) => setPastWork(e.target.value)}
                   />
                 </div>
               </div>
@@ -540,7 +550,9 @@ function AddTalentForm({ setShowForm, setTalent }) {
                       type="text"
                       className="form-control"
                       id="state"
-                      placeholder="If applicable..."
+                      pattern=".{3,}"
+                      title="Please include full name of the state"
+                      placeholder="e.g. New York"
                       value={formState}
                       onChange={(e) => setFormState(e.target.value)}
                     />

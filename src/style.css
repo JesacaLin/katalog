@@ -1,11 +1,3 @@
-/* #root {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-  height: 100%;
-  color: #222222;
-} */
 /* LOOK -- THIS IS THE CORRECT STYLE.CSS */
 
 html {
@@ -14,12 +6,6 @@ html {
   height: 100%;
   color: #222222;
 }
-
-/* #root,
-#root:before,
-#root:after {
-  box-sizing: inherit;
-} */
 
 *,
 *:before,
@@ -70,7 +56,6 @@ body {
   position: sticky;
 }
 
-/* How to indicate something is a link? */
 a {
   text-decoration: none !important;
   color: #222222 !important;
