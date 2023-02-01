@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import supabase from "./supabase";
-// import { API_KEY, BEARER_TOKEN } from "./config";
 
 // TODO --> Add colors to array
 const CATEGORIES = [
@@ -24,6 +23,7 @@ function App() {
   const [stateFilter, setStateFilter] = useState("all");
   const [countryFilter, setCountryFilter] = useState("all");
   const [filteredTalent, setFilteredTalent] = useState([]);
+  // prevent accidental double clicking on submit.
 
   function handleFilterChange(newFilter, filterType) {
     if (filterType === "state") {
@@ -142,7 +142,13 @@ function App() {
                 country={country}
               />
             </aside>
-            <CardContainer talent={filteredTalent} />
+            {/* LOOK take another look at this */}
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <CardContainer talent={filteredTalent} setTalent={setTalent} />
+            )}
+            {/* <CardContainer talent={filteredTalent} /> */}
           </section>
         </div>
       </main>
@@ -153,10 +159,8 @@ function App() {
 function Loader() {
   return (
     <div className="d-flex align-items-center justify-content-center">
-      {/* // <div class="spinner-border" role="status"> */}
-      <span className="sr-only mt-5 loading">Loading...</span>
+      <span className="sr-only mt-5 loading">Loading contributors...</span>
     </div>
-    // </div>
   );
 }
 
@@ -262,7 +266,7 @@ function LocationNav({ country, state, handleFilterChange }) {
 
 const LocationButton = ({ location, type, handleFilterChange }) => (
   <button
-    className="button mt-4"
+    className="button mt-3"
     id="states"
     onClick={() => {
       handleFilterChange(location, type);
@@ -332,19 +336,21 @@ function AddTalentForm({ setShowForm, setTalent }) {
   // FORM STATES
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [portfolio, setPortfolio] = useState("http://");
+  const [phone, setPhone] = useState("917-279-0866"); //delete default
+  const [email, setEmail] = useState("bob@bobster.com"); //delete default
+  const [portfolio, setPortfolio] = useState("http://www.google.com"); //delete default
   const [pastWork, setPastWork] = useState("");
-  const [formCountry, setFormCountry] = useState("");
-  const [formState, setFormState] = useState("");
-  const [city, setCity] = useState("");
+  const [formCountry, setFormCountry] = useState("United States"); //delete default
+  const [formState, setFormState] = useState("New York"); //delete default
+  const [city, setCity] = useState("Brooklyn"); //delete default
 
   async function handleSubmit(e) {
     e.preventDefault();
     //2. validate data. if yes, create new fact.
+
     if (category && name && email) {
       //3. upload fact to supabase and receive the new fact object.
+
       const { data: newTalent, error } = await supabase
         .from("Contributor")
         .insert([
@@ -360,23 +366,20 @@ function AddTalentForm({ setShowForm, setTalent }) {
             city,
           },
         ])
+        // .order("created_at", { ascending: true })
         .select();
 
-      if (error) {
-        console.error(error);
-        return;
-      }
-
-      console.log(newTalent);
       //4. add new fact to the UI: add the fact to state.
-      setTalent((talent) => [newTalent, ...talent]);
+      if (!error) {
+        setTalent((talent) => [newTalent[0], ...talent]);
+      }
 
       //5. reset the input fields
       setCategory("");
       setName("");
       setPhone("");
       setEmail("");
-      setPortfolio("http://");
+      setPortfolio("");
       setPastWork("");
       setFormCountry("");
       setFormState("");
@@ -393,7 +396,7 @@ function AddTalentForm({ setShowForm, setTalent }) {
           ADD A CONTRIBUTOR
         </h6>
       </div>
-      <div className="row justify-content-center my-5">
+      <div className="row justify-content-center my-4">
         {/* LOOK */}
         <form onSubmit={handleSubmit}>
           <div className="col-lg-12">
@@ -410,7 +413,7 @@ function AddTalentForm({ setShowForm, setTalent }) {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  <option value="">Select a Category*</option>
+                  <option value="">Select a Category</option>
                   {CATEGORIES.map((cat) => (
                     <option key={cat.name} value={cat.name}>
                       {cat.name}
@@ -420,10 +423,10 @@ function AddTalentForm({ setShowForm, setTalent }) {
               </div>
             </div>
 
-            <div className="row justify-content-center my-5">
+            <div className="row justify-content-center my-4">
               <div className="col-lg-4">
                 <label htmlFor="name" className="form-label float-left">
-                  Name*
+                  Name
                 </label>
                 <div className="input-group">
                   <span className="input-group-text">
@@ -434,15 +437,16 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     className="form-control"
                     id="name"
                     required
-                    placeholder="First and Last Name"
+                    placeholder="e.g. Bob Bobster"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
+                {/* <div className="form-helper">e.g. Bob Bobster</div> */}
               </div>
               <div className="col-lg-4">
                 <label htmlFor="email" className="form-label">
-                  Email*
+                  Email
                 </label>
                 <div className="input-group">
                   <span className="input-group-text">
@@ -453,15 +457,16 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     className="form-control"
                     id="email"
                     required
-                    placeholder="bob@bobster.com"
+                    placeholder="e.g. bob@gmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
+                {/* <div className="form-helper">e.g. bob@gmail.com</div> */}
               </div>
               <div className="col-lg-4">
                 <label htmlFor="phone" className="form-label">
-                  Phone Number*
+                  Phone
                 </label>
                 <div className="input-group">
                   <span className="input-group-text">
@@ -471,14 +476,15 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     type="tel"
                     className="form-control"
                     id="phone"
-                    placeholder="xxx-xxx-xxxx"
+                    placeholder="e.g. xxx-xxx-xxxx"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
+                {/* <div className="form-helper">e.g. xxx-xxx-xxxx</div> */}
               </div>
             </div>
-            <div className="row justify-content-center my-5">
+            <div className="row justify-content-center my-4">
               <div className="col-lg-6">
                 <label htmlFor="portfolio" className="form-label">
                   Portfolio
@@ -491,13 +497,14 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     type="url"
                     className="form-control"
                     id="portfolio"
-                    // placeholder="http://"
-                    // pattern="https?://.+"
+                    placeholder="e.g. http://www.portfolio.com"
+                    pattern="https?://.+"
                     // required
                     value={portfolio}
                     onChange={(e) => setPortfolio(e.target.value)}
                   />
                 </div>
+                {/* <div className="form-helper">e.g. http://www.portfolio.com</div> */}
               </div>
 
               <div className="col-lg-6">
@@ -512,17 +519,18 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     type="url"
                     className="form-control"
                     id="pastWork"
-                    placeholder="http://"
+                    placeholder="e.g. http://www.past-examples.com"
                     pattern="https?://.+"
                     value={pastWork}
                     onChange={(e) => setPastWork(e.target.value)}
                   />
                 </div>
+                <div className="form-helper">Optional</div>
               </div>
-              <div className="row justify-content-center my-5">
+              <div className="row justify-content-center my-4">
                 <div className="col-lg-4">
                   <label htmlFor="country" className="form-label">
-                    Country*
+                    Country
                   </label>
                   <div className="input-group">
                     <span className="input-group-text">
@@ -532,15 +540,16 @@ function AddTalentForm({ setShowForm, setTalent }) {
                       type="text"
                       className="form-control"
                       id="country"
-                      placeholder="Country"
+                      placeholder="e.g. United States"
                       value={formCountry}
                       onChange={(e) => setFormCountry(e.target.value)}
                     />
                   </div>
+                  <div className="form-helper">Enter full name of country</div>
                 </div>
                 <div className="col-lg-4">
                   <label htmlFor="state" className="form-label">
-                    State*
+                    State
                   </label>
                   <div className="input-group">
                     <span className="input-group-text">
@@ -552,15 +561,18 @@ function AddTalentForm({ setShowForm, setTalent }) {
                       id="state"
                       pattern=".{3,}"
                       title="Please include full name of the state"
-                      placeholder="e.g. New York"
+                      placeholder="e.g. Texas"
                       value={formState}
                       onChange={(e) => setFormState(e.target.value)}
                     />
                   </div>
+                  <div className="form-helper">
+                    If applicable, enter full name of state
+                  </div>
                 </div>
                 <div className="col-lg-4">
                   <label htmlFor="city" className="form-label">
-                    City*
+                    City
                   </label>
                   <div className="input-group">
                     <span className="input-group-text">
@@ -570,11 +582,12 @@ function AddTalentForm({ setShowForm, setTalent }) {
                       type="text"
                       className="form-control"
                       id="city"
-                      placeholder="Austin"
+                      placeholder="e.g. Austin"
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
+                  {/* <div className="form-helper"></div> */}
                 </div>
               </div>
             </div>
@@ -588,8 +601,14 @@ function AddTalentForm({ setShowForm, setTalent }) {
             >
               Cancel
             </button>
-            {/* TODO --> display a message when clicked */}
-            <button type="submit" className="btn modalBTN btn-dark">
+
+            <button
+              type="submit"
+              className="btn modalBTN btn-dark"
+
+              //TODO --> newTalent is undefined, have to figure out how to fix.
+              // onClick={() => setTalent(newTalent)}
+            >
               Submit
             </button>
           </div>
@@ -599,10 +618,9 @@ function AddTalentForm({ setShowForm, setTalent }) {
   );
 }
 
-function CardContainer({ talent }) {
-  // console.log(talent);
+function CardContainer({ talent, setTalent }) {
   return (
-    <section className="cardContainer mt-5 px-4">
+    <section className="cardContainer mt-5 px-4 mb-5">
       <h6 className="cHeader">
         CONTRIBUTORS<i className="bi bi-caret-down-fill ps-2"></i>
       </h6>
@@ -610,7 +628,7 @@ function CardContainer({ talent }) {
         {talent.length > 0 ? (
           talent.map((fact) => (
             <tbody className="mb-5" key={fact.id}>
-              <Card fact={fact} />
+              <Card fact={fact} setTalent={setTalent} />
             </tbody>
           ))
         ) : (
@@ -619,11 +637,33 @@ function CardContainer({ talent }) {
           </tr>
         )}
       </table>
+      <p className="cFooter">
+        There are <b>{talent.length}</b> contributors in the database.
+      </p>
     </section>
   );
 }
 
-function Card({ fact }) {
+function Card({ fact, setTalent }) {
+  const [isUpdating, setIsUpdating] = useState(false);
+  // UPDATE data in supabase: The upVote column by one (onclick)(current vote # + 1), do it on the id that matches the fact being updated.
+
+  async function handleVote(columnName) {
+    setIsUpdating(true);
+    const { data: updatedFact, error } = await supabase
+      .from("Contributor")
+      .update({ [columnName]: fact[columnName] + 1 })
+      .eq("id", fact.id)
+      .select();
+    setIsUpdating(false);
+    if (!error)
+      setTalent((arrOfContributors) => {
+        return arrOfContributors.map((f) =>
+          f.id === fact.id ? updatedFact[0] : f
+        );
+      });
+  }
+
   return (
     //TODO--> Make a table that is two levels only, then us flex to start and to end.
     <>
@@ -635,9 +675,9 @@ function Card({ fact }) {
                 <h5 className="name">{fact.name}</h5>
               </th>
               <td className="pt-4">{fact.category}</td>
-              <td className="pt-4">{fact.country}</td>
               <td className="pt-4">{fact.state}</td>
               <td className="pt-4">{fact.city}</td>
+              <td className="pt-4">{fact.country}</td>
             </tr>
             <tr className="cardBottom">
               <td className="pb-4 ps-4 pt-3">{fact.phone}</td>
@@ -656,6 +696,7 @@ function Card({ fact }) {
                 </button>
               </td>
               <td>
+                {/* Change the vsibility of this based on input */}
                 <button className="btn linkButtons" id="pastWorkBTN">
                   <a
                     href={fact.pastWork}
@@ -667,19 +708,34 @@ function Card({ fact }) {
                 </button>
               </td>
               <td>
-                <button className="btn voteButton me-1" id="upVote">
-                  <span role="img" aria-label="thumbs up">
-                    {" "}
-                    👍 {fact.upVote}{" "}
-                  </span>
-                </button>
+                <div class="d-flex justify-content-center">
+                  <div>
+                    <button
+                      className="btn voteButton me-1"
+                      id="upVote"
+                      onClick={() => handleVote("upVote")}
+                      disabled={isUpdating}
+                    >
+                      <span role="img" aria-label="thumbs up">
+                        👍 {fact.upVote}
+                      </span>
+                    </button>
+                  </div>
 
-                <button className="btn voteButton" id="downVote">
-                  <span role="img" aria-label="thumbs down">
-                    {" "}
-                    👎 {fact.downVote}{" "}
-                  </span>
-                </button>
+                  <div>
+                    <button
+                      type="button"
+                      className="btn voteButton"
+                      id="downVote"
+                      onClick={() => handleVote("downVote")}
+                      disabled={isUpdating}
+                    >
+                      <span role="img" aria-label="thumbs down">
+                        👎 {fact.downVote}
+                      </span>
+                    </button>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>

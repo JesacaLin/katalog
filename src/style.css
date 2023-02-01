@@ -28,7 +28,6 @@ html {
 }
 
 /* FONT WEIGHT */
-.name,
 .location,
 .logoName,
 .fs-5,
@@ -52,7 +51,7 @@ body {
 }
 
 .navbar {
-  border-bottom: 2px solid #222222;
+  border-bottom: 2.5px solid #222222;
   position: sticky;
 }
 
@@ -77,7 +76,7 @@ a {
 /* LEFT SIDE BAR */
 
 .container-for-buttons {
-  outline: 2px solid #222222;
+  outline: 2.5px solid #222222;
   min-height: 600px;
   list-style-type: none;
   padding: 2.5rem;
@@ -103,9 +102,9 @@ a {
   text-align: center;
 }
 
-#searchBar {
+/* #searchBar {
   box-shadow: 3px 3px 5px #dcb7c0;
-}
+} */
 
 .cHeader {
   text-align: left;
@@ -140,7 +139,7 @@ input::placeholder {
 /* RIGHT SIDE */
 
 .cardContainer {
-  outline: 2px solid #222222;
+  outline: 2.5px solid #222222;
   padding: 2.5rem;
 }
 
@@ -166,7 +165,19 @@ input::placeholder {
   background-color: white;
   border-radius: 25px;
   box-shadow: 3px 3px 5px #ecebeb;
+  border: none;
 }
+
+.voteButton button:hover {
+  background-color: #dcb7c0 !important;
+}
+/* #upVote button:disabled {
+  background-color: #dcb7c0;
+}
+
+#downVote button:hover {
+  background-color: #dcb7c0;
+} */
 
 #portfolioBTN,
 #pastWorkBTN {
@@ -175,4 +186,22 @@ input::placeholder {
   border-radius: 25px;
   box-shadow: 3px 3px 5px #ecebeb;
   padding: 0.4rem 1.5rem;
+}
+
+.form-helper {
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: black;
+  opacity: 60%;
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #222222;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1.1rem;
 }
