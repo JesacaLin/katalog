@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import supabase from "./supabase";
+import { Modal, Button } from "react-bootstrap";
 
 // TODO --> Add colors to array
 const CATEGORIES = [
@@ -166,60 +167,48 @@ function Loader() {
 
 function Header() {
   const appTitle = "KATALOG";
+  const [showModal, setShowModal] = useState(false);
+
+  function openModal() {
+    setShowModal(true);
+  }
+
+  function closeModal() {
+    setShowModal(false);
+  }
 
   return (
     <nav className="navbar navbar-expand justify-content-between w-100">
       <div className="container-fluid">
         <h2 className="logoName ps-2">{appTitle}</h2>
-
+        {/* LOOK --> NAV ICONS */}
         <div className="d-flex flex-row">
           <button
             className="button d-flex align-items-center fs-6 px-2"
-            id="login"
-          >
-            LOGIN
-          </button>
-          <button className="button d-flex align-items-center px-2">|</button>
-
-          <button
-            className="button d-flex align-items-center fs-6 px-2"
-            id="sign-up"
-          >
-            SIGN UP
-          </button>
-          <button
-            className="button d-flex align-items-center fs-6 px-2"
             id="about"
+            onClick={openModal}
           >
             ABOUT
           </button>
-          <button className="button d-flex align-items-center px-2">
-            <img
-              src="./assets/toggle.svg"
-              className="add"
-              height="35"
-              alt="add"
-              id="toggle"
-            />
-          </button>
-          <a
-            href="https://github.com/JesacaLin/katalog"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-reset text-decoration-none d-flex align-items-center px-2 me-2"
-          >
-            <img
-              src="https://raw.githubusercontent.com/JesacaLin/dev-kitty/9b9c8e0d370ed7f93549104a1d86771704043b87/public/img/Github.svg"
-              className="add"
-              height="30"
-              alt="github link"
-            />
-          </a>
         </div>
       </div>
+      <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>About</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Modal content goes here</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </nav>
   );
 }
+
 function LocationNav({ country, state, handleFilterChange }) {
   const uniqueStates = [...new Set(state)].filter((s) => s && s !== null);
   const uniqueCountries = [...new Set(country)].filter(
@@ -300,7 +289,10 @@ function SearchBar({ setShowForm, showForm, setTalent, setCountry, setState }) {
             {showForm ? "CLOSE FORM" : "ADD A CONTRIBUTOR"}
           </span>
         </button>
-        <form className="d-flex pe-2" role="search">
+
+        {/* LOOK --> SEARCH BAR */}
+
+        {/* <form className="d-flex pe-2" role="search">
           <input
             className="form-control"
             type="search"
@@ -317,7 +309,7 @@ function SearchBar({ setShowForm, showForm, setTalent, setCountry, setState }) {
               id="searchIcon"
             />
           </button>
-        </form>
+        </form> */}
       </div>
       {/* LOOK 2. USE STATE VARIABLE - TURN THE FORM ON AND OFF */}
       {showForm ? (
@@ -336,13 +328,13 @@ function AddTalentForm({ setShowForm, setTalent }) {
   // FORM STATES
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("917-279-0866"); //delete default
-  const [email, setEmail] = useState("bob@bobster.com"); //delete default
-  const [portfolio, setPortfolio] = useState("http://www.google.com"); //delete default
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [portfolio, setPortfolio] = useState("");
   const [pastWork, setPastWork] = useState("");
-  const [formCountry, setFormCountry] = useState("United States"); //delete default
-  const [formState, setFormState] = useState("New York"); //delete default
-  const [city, setCity] = useState("Brooklyn"); //delete default
+  const [formCountry, setFormCountry] = useState("");
+  const [formState, setFormState] = useState("");
+  const [city, setCity] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -402,9 +394,9 @@ function AddTalentForm({ setShowForm, setTalent }) {
           <div className="col-lg-12">
             <div className="col-lg-4 mx-auto">
               <div className="input-group">
-                <span className="input-group-text">
+                {/* <span className="input-group-text">
                   <i className="bi bi-tag-fill"></i>
-                </span>
+                </span> */}
                 {/* SETTING VALUE OF CATEGORY */}
                 <select
                   className="form-select mx-auto"
@@ -696,7 +688,7 @@ function Card({ fact, setTalent }) {
                 </button>
               </td>
               <td>
-                {/* Change the vsibility of this based on input */}
+                {/* TODO --> Change the vsibility of this based on input */}
                 <button className="btn linkButtons" id="pastWorkBTN">
                   <a
                     href={fact.pastWork}
@@ -710,6 +702,7 @@ function Card({ fact, setTalent }) {
               <td>
                 <div class="d-flex justify-content-center">
                   <div>
+                    {/* TODO --> create autho so only those that signed in can vote */}
                     <button
                       className="btn voteButton me-1"
                       id="upVote"
