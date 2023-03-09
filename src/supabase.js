@@ -1,5 +1,5 @@
 // import { API_KEY, BEARER_TOKEN } from "./config";
-import { API_KEY } from "./config";
+import { API_KEY } from "./config.js";
 
 import { createClient } from "@supabase/supabase-js";
 
