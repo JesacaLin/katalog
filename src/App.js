@@ -192,18 +192,33 @@ function Header() {
           </button>
         </div>
       </div>
-      <Modal show={showModal} onHide={closeModal}>
+      <Modal show={showModal} onHide={closeModal} className="modal-custom">
         <Modal.Header closeButton>
-          <Modal.Title>About</Modal.Title>
+          <Modal.Title>Katalog is a talent directory app.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Modal content goes here</p>
+          <p>
+            It offers an intuitive way for creative teams to find and organize
+            top talent with its unique upvoting and downvoting system and
+            location-based searching.
+          </p>
+          <p>
+            Built with user experience in mind, Katalog eliminates the need for
+            cluttered excel sheets and simplifies the process of sharing
+            information, improving efficiency and potential.
+          </p>
+          <p>
+            Built with: React | JavaScript | HTML 5 | CSS 3 | Bootstrap 5 |
+            Supabase | Figma
+          </p>
+          <h6>To report bugs or provide feedback: JesacaLin@gmail.com</h6>
+          <br></br>
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={closeModal}>
             Close
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </nav>
   );

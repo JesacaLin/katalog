@@ -55,6 +55,11 @@ body {
   position: sticky;
 }
 
+/* ABOUT MODAL */
+.navbar .modal-custom {
+  border-color: transparent;
+}
+
 a {
   text-decoration: none !important;
   color: #222222 !important;
