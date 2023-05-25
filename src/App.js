@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import supabase from "./supabase";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 // TODO --> Add colors to array
+
 const CATEGORIES = [
   { name: "Photo", color: "" },
   { name: "Video", color: "" },
   { name: "Stylist", color: "" },
   { name: "Makeup", color: "" },
   { name: "Hair", color: "" },
-  { name: "Assistant", color: "" },
-  { name: "Other", color: "" },
+  { name: "Photo Assistant", color: "" },
 ];
 
 function App() {
@@ -198,9 +198,9 @@ function Header() {
         </Modal.Header>
         <Modal.Body>
           <p>
-            It offers an intuitive way for creative teams to find and organize
-            top talent with its unique upvoting and downvoting system and
-            location-based searching.
+            Katalog offers an intuitive way for creative teams to find and
+            organize top talent with its unique upvoting and downvoting system
+            and location-based searching.
           </p>
           <p>
             Built with user experience in mind, Katalog eliminates the need for
@@ -529,6 +529,8 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     placeholder="e.g. http://www.past-examples.com"
                     pattern="https?://.+"
                     value={pastWork}
+                    //************************************** */
+                    disabled={!pastWork}
                     onChange={(e) => setPastWork(e.target.value)}
                   />
                 </div>
@@ -703,8 +705,11 @@ function Card({ fact, setTalent }) {
                 </button>
               </td>
               <td>
-                {/* TODO --> Change the vsibility of this based on input */}
-                <button className="btn linkButtons" id="pastWorkBTN">
+                <button
+                  className="btn linkButtons"
+                  id="pastWorkBTN"
+                  disabled={!fact.pastWork}
+                >
                   <a
                     href={fact.pastWork}
                     target="_blank"
