@@ -91,8 +91,8 @@ a {
 #all {
   background-color: #f1f1f1;
   padding: 0.5rem;
-  width: 100%;
-  font-weight: 500;
+  width: 90%;
+  font-weight: 400;
   box-shadow: 3px 3px 5px #dcb7c0;
 }
 
@@ -151,6 +151,7 @@ input::placeholder {
 .innerCardContainer {
   background-color: #f1f1f1;
   box-shadow: 3px 3px 5px #dcb7c0;
+  max-width: 100%;
 }
 
 #searchIcon {
@@ -164,8 +165,8 @@ input::placeholder {
 
 #upVote,
 #downVote {
-  width: 80px;
-  font-weight: 600;
+  width: 75px;
+  font-weight: 500;
   max-width: 100%;
   background-color: white;
   border-radius: 25px;
@@ -186,11 +187,12 @@ input::placeholder {
 
 #portfolioBTN,
 #pastWorkBTN {
-  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 500;
+  width: 90%;
   background-color: white;
   border-radius: 25px;
   box-shadow: 3px 3px 5px #ecebeb;
-  padding: 0.4rem 1.5rem;
 }
 
 .form-helper {
@@ -207,6 +209,6 @@ input::placeholder {
 }
 
 .name {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.1rem;
 }

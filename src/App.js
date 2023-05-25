@@ -6,7 +6,7 @@ import { Modal } from "react-bootstrap";
 // TODO --> Add colors to array
 
 const CATEGORIES = [
-  { name: "Photo", color: "" },
+  { name: "Photographer", color: "" },
   { name: "Video", color: "" },
   { name: "Stylist", color: "" },
   { name: "Makeup", color: "" },
@@ -42,8 +42,8 @@ function App() {
       async function getTalent() {
         try {
           setIsLoading(true);
-          // Placed a limit of 35 entries on the page
-          let query = supabase.from("Contributor").select("*").limit(35);
+          // Placed a limit of 25 entries on the page
+          let query = supabase.from("Contributor").select("*").limit(25);
 
           if (stateFilter !== "all" && countryFilter !== "all") {
             query.and((qb) => {
@@ -198,20 +198,22 @@ function Header() {
         </Modal.Header>
         <Modal.Body>
           <p>
-            Katalog offers an intuitive way for creative teams to find and
-            organize top talent with its unique upvoting and downvoting system
-            and location-based searching.
+            Katalog is an innovative talent directory app designed to empower
+            creative teams in discovering and managing top talent. With its
+            intuitive upvoting and downvoting system and location-based search
+            functionality, Katalog offers a seamless way to find and organize
+            skilled professionals.
           </p>
           <p>
-            Built with user experience in mind, Katalog eliminates the need for
-            cluttered excel sheets and simplifies the process of sharing
-            information, improving efficiency and potential.
+            By prioritizing user experience, Katalog eliminates the reliance on
+            cumbersome excel sheets and streamlines the information-sharing
+            process, resulting in improved efficiency and enhanced potential.
           </p>
           <p>
             Built with: React | JavaScript | HTML 5 | CSS 3 | Bootstrap 5 |
             Supabase | Figma
           </p>
-          <h6>To report bugs or provide feedback: JesacaLin@gmail.com</h6>
+          <h6>To report bugs or provide suggestions: JesacaLin@gmail.com</h6>
           <br></br>
         </Modal.Body>
         {/* <Modal.Footer>
@@ -530,7 +532,7 @@ function AddTalentForm({ setShowForm, setTalent }) {
                     pattern="https?://.+"
                     value={pastWork}
                     //************************************** */
-                    disabled={!pastWork}
+                    // disabled={!pastWork}
                     onChange={(e) => setPastWork(e.target.value)}
                   />
                 </div>
