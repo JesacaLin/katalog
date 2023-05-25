@@ -628,14 +628,16 @@ function AddTalentForm({ setShowForm, setTalent }) {
 }
 
 function CardContainer({ talent, setTalent }) {
+  const sortedTalent = talent.sort((a, b) => b.upVote - a.upVote);
+
   return (
     <section className="cardContainer mt-5 px-4 mb-5">
       <h6 className="cHeader">
         CONTRIBUTORS<i className="bi bi-caret-down-fill ps-2"></i>
       </h6>
       <table className="table table-borderless table-responsive-xxl talentList">
-        {talent.length > 0 ? (
-          talent.map((fact) => (
+        {sortedTalent.length > 0 ? (
+          sortedTalent.map((fact) => (
             <tbody className="mb-5" key={fact.id}>
               <Card fact={fact} setTalent={setTalent} />
             </tbody>
@@ -647,7 +649,7 @@ function CardContainer({ talent, setTalent }) {
         )}
       </table>
       <p className="cFooter">
-        There are <b>{talent.length}</b> contributors in the database.
+        There are <b>{sortedTalent.length}</b> contributors in the database.
       </p>
     </section>
   );
