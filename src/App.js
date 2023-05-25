@@ -42,8 +42,8 @@ function App() {
       async function getTalent() {
         try {
           setIsLoading(true);
-          // Placed a limit of 25 entries on the page
-          let query = supabase.from("Contributor").select("*").limit(25);
+          // Placed a limit of 35 entries on the page
+          let query = supabase.from("Contributor").select("*").limit(35);
 
           if (stateFilter !== "all" && countryFilter !== "all") {
             query.and((qb) => {
@@ -655,22 +655,31 @@ function CardContainer({ talent, setTalent }) {
 
 function Card({ fact, setTalent }) {
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isVoted, setIsVoted] = useState(false);
   // UPDATE data in supabase: The upVote column by one (onclick)(current vote # + 1), do it on the id that matches the fact being updated.
 
   async function handleVote(columnName) {
+    if (isUpdating || isVoted) {
+      return;
+    }
+
     setIsUpdating(true);
-    const { data: updatedFact, error } = await supabase
-      .from("Contributor")
-      .update({ [columnName]: fact[columnName] + 1 })
-      .eq("id", fact.id)
-      .select();
-    setIsUpdating(false);
-    if (!error)
-      setTalent((arrOfContributors) => {
-        return arrOfContributors.map((f) =>
-          f.id === fact.id ? updatedFact[0] : f
+    try {
+      const { data: updatedFact, error } = await supabase
+        .from("Contributor")
+        .update({ [columnName]: fact[columnName] + 1 })
+        .eq("id", fact.id)
+        .select();
+
+      if (!error) {
+        setTalent((arrOfContributors) =>
+          arrOfContributors.map((f) => (f.id === fact.id ? updatedFact[0] : f))
         );
-      });
+        setIsVoted(true);
+      }
+    } finally {
+      setIsUpdating(false);
+    }
   }
 
   return (
@@ -727,7 +736,7 @@ function Card({ fact, setTalent }) {
                       className="btn voteButton me-1"
                       id="upVote"
                       onClick={() => handleVote("upVote")}
-                      disabled={isUpdating}
+                      disabled={isUpdating || isVoted}
                     >
                       <span role="img" aria-label="thumbs up">
                         👍 {fact.upVote}
@@ -741,7 +750,7 @@ function Card({ fact, setTalent }) {
                       className="btn voteButton"
                       id="downVote"
                       onClick={() => handleVote("downVote")}
-                      disabled={isUpdating}
+                      disabled={isUpdating || isVoted}
                     >
                       <span role="img" aria-label="thumbs down">
                         👎 {fact.downVote}
