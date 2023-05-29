@@ -42,8 +42,8 @@ function App() {
       async function getTalent() {
         try {
           setIsLoading(true);
-          // Placed a limit of 25 entries on the page
-          let query = supabase.from("Contributor").select("*").limit(25);
+          // Placed a limit of 500 entries on the page
+          let query = supabase.from("Contributor").select("*").limit(500);
 
           if (stateFilter !== "all" && countryFilter !== "all") {
             query.and((qb) => {
