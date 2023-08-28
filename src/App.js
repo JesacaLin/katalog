@@ -167,6 +167,8 @@ function Loader() {
 
 function Header() {
   const appTitle = "KATALOG";
+  const homeLink = "https://katalogapp.netlify.app/";
+
   const [showModal, setShowModal] = useState(false);
 
   function openModal() {
@@ -180,7 +182,9 @@ function Header() {
   return (
     <nav className="navbar navbar-expand justify-content-between w-100">
       <div className="container-fluid">
-        <h2 className="logoName ps-2">{appTitle}</h2>
+        <h2 className="logoName ps-2">
+          <a href={homeLink}>{appTitle}</a>
+        </h2>
         {/* LOOK --> NAV ICONS */}
         <div className="d-flex flex-row">
           <button
@@ -210,6 +214,11 @@ function Header() {
             process, resulting in improved efficiency and enhanced potential.
           </p>
           <p>
+            <strong>
+              Please refresh the page to see newly added contributors.
+            </strong>
+          </p>
+          <p>
             Built with: React | JavaScript | HTML 5 | CSS 3 | Bootstrap 5 |
             Supabase | Figma
           </p>
@@ -234,17 +243,17 @@ function LocationNav({ country, state, handleFilterChange }) {
 
   return (
     <ul className="container-for-buttons mt-5">
-      <h6 className="location">
+      {/* <h6 className="location">
         LOCATIONS<i className="bi bi-caret-down-fill ps-2"></i>
-      </h6>
-      <button
+      </h6> */}
+      {/* <button
         className="btn button mt-4"
         id="all"
         onClick={() => handleFilterChange("all", "state")}
       >
         All
-      </button>
-      <h6 className="location mt-5">
+      </button> */}
+      <h6 className="location">
         UNITED STATES<i className="bi bi-caret-down-fill ps-2"></i>
       </h6>
       {uniqueStates.map((s, index) => (
@@ -653,6 +662,7 @@ function CardContainer({ talent, setTalent }) {
       <p className="cFooter">
         There are <b>{sortedTalent.length}</b> contributors in the database.
       </p>
+      <p>Concept & Design &copy; Jesaca Lin 2023</p>
     </section>
   );
 }
