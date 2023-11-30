@@ -660,9 +660,11 @@ function CardContainer({ talent, setTalent }) {
             </tbody>
           ))
         ) : (
-          <tr>
-            <td>Select a location or search for a contributor</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>Select a location or search for a contributor</td>
+            </tr>
+          </tbody>
         )}
       </table>
       <p className="cFooter">
