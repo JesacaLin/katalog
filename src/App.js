@@ -26,6 +26,8 @@ function App() {
   const [filteredTalent, setFilteredTalent] = useState([]);
   // prevent accidental double clicking on submit.
 
+  console.log("talent", talent);
+
   function handleFilterChange(newFilter, filterType) {
     if (filterType === "state") {
       setCountryFilter("all");
@@ -743,7 +745,7 @@ function Card({ fact, setTalent }) {
                 </button>
               </td>
               <td>
-                <div class="d-flex justify-content-center">
+                <div className="d-flex justify-content-center">
                   <div>
                     {/* TODO --> create autho so only those that signed in can vote */}
                     <button
