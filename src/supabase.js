@@ -1,10 +1,8 @@
-// import { API_KEY, BEARER_TOKEN } from "./config";
-import { API_KEY } from "./config.js";
-
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = "https://xmbmbdtgbybujizevhyc.supabase.co";
-const supabaseKey = API_KEY;
+const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
+//const bearerToken = process.env.REACT_APP_BEARER_TOKEN;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default supabase;
