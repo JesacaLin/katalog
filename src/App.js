@@ -652,7 +652,11 @@ function CardContainer({ talent, setTalent }) {
         {sortedTalent.length > 0 ? (
           sortedTalent.map((fact) => (
             <tbody className="mb-5" key={fact.id}>
-              <Card fact={fact} setTalent={setTalent} />
+              <tr>
+                <td>
+                  <Card fact={fact} setTalent={setTalent} />
+                </td>
+              </tr>
             </tbody>
           ))
         ) : (
